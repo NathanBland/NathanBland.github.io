@@ -54,6 +54,7 @@ nav ul {
 .nav-button:hover {
     border: 2px solid white;
     background-color: rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 6px black;
 }
 main {
     flex: 3;
@@ -84,9 +85,14 @@ article > p,a {
     padding: 1em;
 }
 article > .nav-button {
-    background-color: #124B6C;
+    background-color: rgba(218, 218, 218, 0.85);
     margin-left: 1em;
     margin-bottom: 1em;
+    color: #124B6C;
+    border: none;
+    
+}
+article > .nav-button:hover {
+    border: none;
     color: white;
-    border: 2px solid black;
 }

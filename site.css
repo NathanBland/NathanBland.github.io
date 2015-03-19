@@ -22,7 +22,7 @@ header {
 }
 .header-profile {
     width: 100%;
-    background-color: rgba(240, 248, 255, 0.9);
+    background-color: rgba(255, 255, 255, 1);
     background-size: cover;
     padding-top: 2em;
     padding-bottom: 2em;
@@ -36,7 +36,7 @@ header {
 }
 .profile-img:hover {
     width: 55%;
-    border: .5em solid white;
+    border: .5em solid black;
 }
 nav ul {
     padding: 0;

@@ -30,13 +30,12 @@ header {
 }
 .profile-img {
     width: 50%;
-    border-sizing: border-box;
-    border: .5em solid #a4b8c4;
+    box-shadow: 0px 0px 3px black;
     transition: 1s all;
 }
 .profile-img:hover {
     width: 55%;
-    border: .5em solid black;
+    box-shadow: 0px 0px 12px black;
 }
 nav ul {
     padding: 0;
@@ -88,11 +87,31 @@ article > .nav-button {
     background-color: rgba(218, 218, 218, 0.85);
     margin-left: 1em;
     margin-bottom: 1em;
+    padding: .7em;
     color: #124B6C;
     border: none;
     
 }
 article > .nav-button:hover {
+    border: none;
+    color: white;
+}
+
+.paging {
+    margin-top: .5em;
+    margin-bottom: 1em;
+    display: flex;
+    align-content: center;
+}
+.page-button {
+    background-color: white;
+    color: #124B6C;
+    border: none;
+    padding: .7em;
+    margin: .5em;
+    margin-bottom: 1em;
+}
+.page-button:hover {
     border: none;
     color: white;
 }

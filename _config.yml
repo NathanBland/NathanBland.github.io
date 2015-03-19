@@ -1,0 +1,14 @@
+#deps
+pygments:	true
+
+#Permalinks
+permalink:	pretty
+
+title:	Nathan Bland
+
+author:
+ name:	'Nathan Bland'
+ url:	https://github.com/NathanBland/
+
+paginate:	1
+

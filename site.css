@@ -53,7 +53,7 @@ nav ul {
 .nav-button:hover {
     border: 2px solid white;
     background-color: rgba(0,0,0,0.5);
-    box-shadow: 0px 0px 6px black;
+    box-shadow: 0px 0px 12px black;
 }
 main {
     flex: 3;
@@ -102,16 +102,17 @@ article > .nav-button:hover {
     margin-bottom: 1em;
     display: flex;
     align-content: center;
-}
-.page-button {
     background-color: white;
+}
+.paging > .nav-button {
     color: #124B6C;
     border: none;
     padding: .7em;
     margin: .5em;
     margin-bottom: 1em;
 }
-.page-button:hover {
+.paging > .nav-button:hover {
     border: none;
     color: white;
+    box-shadow: none;
 }

@@ -60,8 +60,8 @@ nav ul {
 }
 main {
     flex: 3;
-    padding-left: 2em;
-    padding-right: 4em;
+    padding-left: 3em;
+    padding-right: 3em;
     /*display: flex; /* disabled until I can figure out what's up with chrome and IE. */
     flex-direction: column;
     overflow-y: scroll;
@@ -103,19 +103,12 @@ article > .nav-button:hover {
 .paging {
     margin-top: .5em;
     margin-bottom: 1em;
-    display: flex;
-    align-content: center;
-    background-color: white;
 }
 .paging > .nav-button {
-    color: #124B6C;
-    border: none;
     padding: .7em;
     margin: .5em;
     margin-bottom: 1em;
 }
 .paging > .nav-button:hover {
-    border: none;
     color: white;
-    box-shadow: none;
 }

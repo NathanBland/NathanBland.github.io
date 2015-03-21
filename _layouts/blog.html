@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NathanBland.github.io</title>
+        <!--<link rel="stylesheet" href="//cdn.jsdelivr.net/pure/0.6.0/pure-min.css">-->
+        <link rel="stylesheet" href="/site.css">
+    </head>
+    <body>
+        <header>
+            <h1>Nathan Bland</h1>
+            <div class="header-profile">
+                <img class="profile-img" src="img/outdoors.JPG">
+            </div>
+            <h2>This site is in an alpha state.</h2>
+            <nav>
+                <ul>
+                    <a class="nav-button" href="#"><li>Developer</li></a>
+                    <a class="nav-button" href="#"><li>Outdoorsmen</li></a>
+                    <!--<a href="#"><li>About me</li></a>
+                    <a href="#"><li>Things I've made</li></a>
+                    <a href="#"><li>Where I've worked</li></a>
+                    <a href="#"><li>Contact me</li></a>
+                    <a href="#"><li>Blog</li></a>-->
+                </ul>
+            </nav>
+        </header>
+        <main role="main">
+            {% for post in site.posts %}
+            <article>
+                <h2>{{ post.title }}</h2>
+                {{ post.excerpt }}
+                <a class="nav-button" href="{{ post.url }}">Read more...</a>
+            </article>
+            <nav class="paging">
+                <a class="nav-button" href="#">1</a>
+            </nav>
+            <br/>
+        </main>
+    </body>
+
+</html>

@@ -1,9 +1,3 @@
-#deps
-pygments:	true
-
-#Permalinks
-markdown: redcarpet
-highlighter: pygments
 
 name:	Nathan Bland
 

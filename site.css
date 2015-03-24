@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-color: #1D84C5;
+    background-color: white;
     display: flex;
     min-height: 100vh;
     height: 100vh;
@@ -12,7 +12,7 @@ body {
 }
 header {
     flex: 1;
-    background-color: rgba(9, 19, 21, 0.5);
+    background-color: #124B6C;
     background-size: cover;
     box-shadow: 0px 0px 5px black;
     /*display: flex;/* Temp fixes for IE, and chrome */
@@ -22,6 +22,10 @@ header {
 }
 header > h1, h2, nav {
     text-align: center;
+}
+header > h1 > a {
+    color: white;
+    text-decoration: none;
 }
 .header-profile {
     width: 100%;
@@ -59,19 +63,44 @@ nav ul {
     box-shadow: 0px 0px 12px black;
 }
 main {
-    flex: 3;
-    padding-left: 3em;
-    padding-right: 3em;
-    /*display: flex; /* disabled until I can figure out what's up with chrome and IE. */
+    flex: 3 1 0%;
     flex-direction: column;
     overflow-y: scroll;
+}
+.landing {
+    position: relative;
+    z-index: -1;
+    margin-top: 0;
+    padding-top: 0;
+    min-height: 10em;
+}
+.main-landing {
+    background: url("/img/laptop.jpg");
+    background-size: cover;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+}
+.blog-landing {
+    background: url("/img/landing.jpg");
+    background-size: cover;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+}
+.landing h2 {
+    margin: 0;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    text-shadow: 1px 2px #000000;
+    color:white;
+    font-size: 5em;
 }
 article {
     margin-top: .5em;
     margin-bottom: .5em;
+    margin-left: 10em;
+    margin-right: 10em;
     background-color: rgba(255, 255, 255, 1);
     transition: 1s all;
-    box-shadow: 0px 0px 3px black;
 }
 article:hover {
     box-shadow: 0px 0px 12px black;
@@ -97,9 +126,18 @@ article > .nav-button {
 }
 article > .nav-button:hover {
     border: none;
+    background-color: #124B6C;
     color: white;
 }
-
+.post-full > h2 {
+    font-size: 2em;
+}
+.post-full:hover {
+    box-shadow: none;
+}
+p > img {
+    width: 100%;
+}
 .paging {
     margin-top: .5em;
     margin-bottom: 1em;

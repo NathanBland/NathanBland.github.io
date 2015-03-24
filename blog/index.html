@@ -1,0 +1,25 @@
+---
+layout: default
+title: Dev Blog
+---
+<aside class="landing blog-landing"> 
+    <h2>Dev Blog</h2>
+</aside>
+{% for post in site.posts %}
+    <article>
+        <h2>{{ post.title }}</h2>
+        {{ post.excerpt }}
+        <a class="nav-button" href="{{ post.url }}">Read more...</a>
+    </article>
+{% endfor %}
+<nav class="paging">
+    {% for page in (1..paginator.total_pages) %}
+        {% if page == paginator.page %}
+            <span class="nav-button">{{page}}</span>
+        {% elsif page == 1 %}
+            <a class="nav-button" href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+        {% else %}
+            <a class="nav-button" href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+        {% endif %}
+    {% endfor %}
+</nav>

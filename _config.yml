@@ -2,13 +2,14 @@
 pygments:	true
 
 #Permalinks
-permalink:	pretty
+markdown: redcarpet
+highlighter: pygments
 
 title:	Nathan Bland
 
 author:
  name:	'Nathan Bland'
- url:	https://github.com/NathanBland/
-
-paginate:	1
-
+ #url:	https://github.com/NathanBland/
+baseurl: ""
+paginate_path: "/blog/page:num/"
+paginate:	3

@@ -8,7 +8,7 @@ title: Dev Blog
 {% for post in site.posts %}
     <article>
         <h2>{{ post.title }}</h2>
-        {{ post.excerpt }}
+        <span class="post-excrept">{{ post.excerpt }}</span>
         <a class="nav-button" href="{{ post.url }}">Read more...</a>
     </article>
 {% endfor %}

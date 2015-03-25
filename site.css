@@ -130,6 +130,11 @@ article > h2 {
     margin: 0em;
     color: #124B6C;
 }
+article > section:first-child::after {
+    content: "";
+    clear: both;
+    display: block;
+}
 .page-full > section {
     position: relative;
 }

@@ -210,3 +210,23 @@ p > img {
     background-color: #124B6C;
     color: white;
 }
+
+/***** MEDIA QUERIES *****/
+@media (max-width: 768px) {
+    body {
+        display: block;
+    }
+    article {
+        margin: 1em;
+    }
+    .highlight {
+        overflow-x: auto;
+    }
+    header > h1 {
+        margin-top: 0em;
+        padding-top: .5em;
+    }
+    header > nav > ul > .nav-button {
+        margin-bottom: .5em;
+    }
+}

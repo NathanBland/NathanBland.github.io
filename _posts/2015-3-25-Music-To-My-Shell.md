@@ -2,7 +2,6 @@
 layout: post
 title: Music To My Shell - Configuring pianobar
 ---
-#Intro#
 I love music and the way it can put me in the mood to write or develop different things. I'm also currently in love with [Arch Linux](https://www.archlinux.org/), and just Linux in general. So I figured, time to find a way to combine the two.
 
 [Pianobar](http://6xq.net/projects/pianobar/) is a great little CLI tool that can be used to stream [Pandora](http://www.pandora.com/) through your shell, its great and I love everything that it does. 

@@ -229,4 +229,7 @@ p > img {
     header > nav > ul > .nav-button {
         margin-bottom: .5em;
     }
+    .landing h2 {
+        font-size: 4em;
+    }
 }

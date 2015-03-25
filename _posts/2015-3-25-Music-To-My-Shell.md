@@ -37,7 +37,9 @@ $ mkdir ~/.config/pianobar
 $ touch ~/.config/pianobar/config
 {% endhighlight %}
 
-Great! Now we have a configuration file to work with. Lets start out with getting some authentication going for us...`$ nano ~/.config/pianobar/config`
+Great! Now we have a configuration file to work with. Lets start out with getting some authentication going for us...
+
+`$ nano ~/.config/pianobar/config`
 
 {% highlight bash %}
 password = <yourpassword>

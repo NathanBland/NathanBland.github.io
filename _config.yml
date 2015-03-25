@@ -7,3 +7,5 @@ author:
 baseurl: ""
 paginate_path: "/blog/page:num/"
 paginate:	3
+gems:
+  - jekyll-mentions

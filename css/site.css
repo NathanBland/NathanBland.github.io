@@ -178,6 +178,9 @@ article > .nav-button:hover {
 .post-excrept > p {
     padding-left: 1em;
 }
+.post-full {
+    margin-bottom: 5em;
+}
 .post-full > h2 {
     font-size: 2em;
 }

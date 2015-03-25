@@ -2,7 +2,7 @@
 layout: post
 title: Music To My Shell - Configuring pianobar
 ---
-I love music and the way it can put me in the mood to write or develop different things. I'm also currently in love with [Arch Linux](https://www.archlinux.org/), and just Linux in general. So I figured, time to find a way to combine the two.
+I love music and the way it can put me in the mood to write or develop different things. I'm also currently in love with [Arch Linux](https://www.archlinux.org/), and just Linux in general. So naturally I started looking for CLI music players.
 
 [Pianobar](http://6xq.net/projects/pianobar/) is a great little CLI tool that can be used to stream [Pandora](http://www.pandora.com/) through your shell, its great and I love everything that it does. 
 
@@ -13,7 +13,7 @@ Installing it is easy enough on arch:
 
 There is also a [Ubuntu PPA](https://launchpad.net/ubuntu/+source/pianobar) but I'm not going to cover using in that in this article.
 
-Running it after it has been installed is easy enough, a simple `$ pianobar` will do the trick to get it up and running. You will then be presented with a list of stations, mine looks like this:
+Running it after it has been installed is simple; `$ pianobar` will do the trick to get it up and running. You will then be presented with a list of stations, mine looks like this:
 
 **Station List**
 ![Station List](/img/pianobar_stations.png)
@@ -21,7 +21,7 @@ Running it after it has been installed is easy enough, a simple `$ pianobar` wil
 The one issue with this is that it prompts you for user authentication every time you use it, which is something I figured should be automatic.
 
 #Configuration#
-A little reading on the [Arch Wiki](https://wiki.archlinux.org/index.php/Pianobar#Configuration) revealed that this is quite easy, and even shows a few other things I hadn't thought of. First things first, we need to make a configuration file, which is easy enough. 
+A little reading on the [Arch Wiki](https://wiki.archlinux.org/index.php/Pianobar#Configuration) revealed that this is quite easy, and even shows a few other things I hadn't thought of. First things first, we need to make a configuration file, which is straight forward. 
 
 According to the wiki we need to make our configuration file at `~/.config/pianobar/config` ok great, lets do that!
 {% highlight bash %}

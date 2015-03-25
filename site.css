@@ -184,14 +184,18 @@ article > .nav-button:hover {
 .post-full:hover {
     box-shadow: none;
 }
-pre {
+.highlight {
+    background-color: #F8F8F8;
+}
+code {
     background-color: #F8F8F8;
 }
 
 
 
 p > img {
-    width: 100%;
+    max-width: 100%;
+    display: block;
 }
 .paging {
     margin-top: .5em;

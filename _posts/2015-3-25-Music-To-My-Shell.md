@@ -11,7 +11,7 @@ Installing it is easy enough on arch:
 
 `$ sudo pacman -S pianobar`
 
-There is also a [Ubuntu PPA](https://launchpad.net/ubuntu/+source/pianobar) but I'm not going to cover using in that in this article.
+There is also a [Ubuntu PPA](https://launchpad.net/ubuntu/+source/pianobar) but I'm not going to cover using that in this article.
 
 Running it after it has been installed is simple; `$ pianobar` will do the trick to get it up and running. You will then be presented with a list of stations, mine looks like this:
 

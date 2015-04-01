@@ -217,7 +217,12 @@ p > img {
     background-color: #124B6C;
     color: white;
 }
-
+.paging >.active-page {
+    border: none;
+    background-color: #124B6C;
+    box-shadow: 0px 0px 12px black;
+    color: white;
+}
 /***** MEDIA QUERIES *****/
 @media (max-width: 768px) {
     body {

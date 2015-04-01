@@ -6,6 +6,6 @@ author:
  #url:	https://github.com/NathanBland/
 baseurl: ""
 paginate_path: "/blog/page:num/"
-paginate:   2
+paginate:   3
 gems:
   - jekyll-mentions

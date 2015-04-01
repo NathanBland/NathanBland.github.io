@@ -190,6 +190,11 @@ article > .nav-button:hover {
 .highlight {
     background-color: #F8F8F8;
 }
+pre {
+    padding: 1em;
+    letter-spacing: 0.05em;
+    font-size: 1.3em;
+}
 code {
     background-color: #F8F8F8;
 }

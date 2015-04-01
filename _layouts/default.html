@@ -9,7 +9,9 @@
         <link href='//fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
         <link href='//fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/css/syntax.css">
+        <!--<link rel="stylesheet" href="/css/syntax.css">-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
         <link rel="stylesheet" href="/css/site.css">
     </head>
     <body>
@@ -34,6 +36,7 @@
         <main role="main">
             {{content}}
         </main>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 
 </html>

@@ -1,8 +1,3 @@
----
-layout: post
-title: Jekyll My Blog
----
-
 Finally! basic configuration is working, and blog posts are also functioning. Now to Test!
 
 ![_config.yml]({{ site.baseurl }}/img/laptop.jpg)

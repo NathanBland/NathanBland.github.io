@@ -26,12 +26,12 @@ workbox.precaching.precacheAndRoute([
     "revision": "73d61e97c0e7203d85e4642b7783d1c5"
   },
   {
-    "url": "/_nuxt/eee9634f20559caeb485.js",
-    "revision": "2b63548494ed2db1383b1144f49a9881"
+    "url": "/_nuxt/b46fd3379fd3ae3e238b.js",
+    "revision": "0530c20334caf729ba64a834317cb94a"
   },
   {
-    "url": "/_nuxt/f38124398dee9a1746c2.js",
-    "revision": "43b3ec6c3b5aaa9b7260467f54e24760"
+    "url": "/_nuxt/eee9634f20559caeb485.js",
+    "revision": "2b63548494ed2db1383b1144f49a9881"
   }
 ], {
   "cacheId": "NathanBland.github.io",

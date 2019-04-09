@@ -1,11 +1,7 @@
-# STATIC
+# Nathanbland.dev
 
-**This directory is not required, you can delete it if you don't want to use it.**
+This is probably not the branch you want.
 
-This directory contains your static files.
-Each file inside this directory is mapped to `/`.
-Thus you'd want to delete this README.md before deploying to production.
+To look at the source, head to the [development branch](https://github.com/NathanBland/NathanBland.github.io/tree/development).
 
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/guide/assets#static).
+For some reason `github` pages requires the master branch to be used for builds for username sites.

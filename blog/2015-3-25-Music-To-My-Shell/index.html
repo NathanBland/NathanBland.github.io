@@ -8,10 +8,56 @@
       NathanBland
       <span data-v-109bcd90>.dev</span></h1> <h2 class="subtitle" data-v-109bcd90>
       Developer, outdoor enthusiast.
-    </h2></section></div> <div class="links" data-v-10bea7dc><a href="/blog" class="nuxt-link-active" data-v-10bea7dc>Blog</a> <a href="https://github.com/nathanbland" target="_blank" data-v-10bea7dc>GitHub ↗</a> <a href="https://dev.to/nathanabland" target="_blank" data-v-10bea7dc>Dev.to ↗</a> <a href="https://twitter.com/nathanabland" target="_blank" data-v-10bea7dc>Twitter ↗</a></div></nav> <div class="post">{
-  "link": "2015-3-25-Music-To-My-Shell",
-  "title": "Music To My Shell - Configuring pianobar",
-  "date": "2015-3-25"
-}</div></section></div></div></div><script>window.__NUXT__={layout:"default",data:[{post:{link:"2015-3-25-Music-To-My-Shell",title:"Music To My Shell - Configuring pianobar",date:"2015-3-25"}}],error:null,serverRendered:!0}</script><script src="/app/141253c2aeff438fe2f6.js" defer></script><script src="/app/869c3815f32aedc64042.js" defer></script><script src="/app/3bb043d6186af0c3f093.js" defer></script><script src="/app/36d444b2aea95af0b32b.js" defer></script><script src="/app/4493c8f6f6002fc1f668.js" defer></script><script src="/app/bd5c746264bb09a88478.js" defer></script><script src="/app/6f6b6daaa30bc13bf9cd.js" defer></script>
+    </h2></section></div> <div class="links" data-v-10bea7dc><a href="/blog" class="nuxt-link-active" data-v-10bea7dc>Blog</a> <a href="https://github.com/nathanbland" target="_blank" data-v-10bea7dc>GitHub ↗</a> <a href="https://dev.to/nathanabland" target="_blank" data-v-10bea7dc>Dev.to ↗</a> <a href="https://twitter.com/nathanabland" target="_blank" data-v-10bea7dc>Twitter ↗</a></div></nav> <div class="post"><p>I love music and the way it can put me in the mood to write or develop different things. I'm also currently in love with <a href="https://www.archlinux.org/">Arch Linux</a>, and just Linux in general. So naturally I started looking for CLI music players.</p>
+<p><a href="http://6xq.net/projects/pianobar/">Pianobar</a> is a great little CLI tool that can be used to stream <a href="http://www.pandora.com/">Pandora</a> through your shell, its great and I love everything that it does. </p>
+<h1 id="setup">Setup</h1>
+<p>Installing it is easy enough on arch:</p>
+<p><code>$ sudo pacman -S pianobar</code></p>
+<p>There is also a <a href="https://launchpad.net/ubuntu/+source/pianobar">Ubuntu PPA</a> but I'm not going to cover using that in this article.</p>
+<p>Running it after it has been installed is simple; <code>$ pianobar</code> will do the trick to get it up and running. You will then be presented with a list of stations, mine looks like this:</p>
+<p><strong>Station List</strong>
+<img src="/img/pianobar_stations.png" alt="Station List"></p>
+<p>The one issue with this is that it prompts you for user authentication every time you use it, which is something I figured should be automatic.</p>
+<p>#Configuration#
+A little reading on the <a href="https://wiki.archlinux.org/index.php/Pianobar#Configuration">Arch Wiki</a> revealed that this is quite easy, and even shows a few other things I hadn't thought of. First things first, we need to make a configuration file, which is straight forward. </p>
+<p>According to the wiki we need to make our configuration file at <code>~/.config/pianobar/config</code> ok great, lets do that!</p>
+<pre><code class="language-bash">$ touch ~/.config/pianobar/config
+
+touch: cannot touch ‘/home/nathan/.config/pianobar/config’: No such file or directory</code></pre>
+<p>Ok, fine, we'll go make the directory first.</p>
+<pre><code class="language-bash">$ mkdir ~/.config/pianobar
+$ touch ~/.config/pianobar/config</code></pre>
+<p>Great! Now we have a configuration file to work with. Lets start out with getting some authentication going for us...</p>
+<p><code>$ nano ~/.config/pianobar/config</code></p>
+<pre><code class="language-bash">password = &lt;yourpassword>
+user = &lt;username></code></pre>
+<p>Save and exit. Now lets try running pianobar again. <code>$ pianobar</code></p>
+<p><strong>Pianobar automatic login</strong>
+<img src="/img/pianobar_auth.png" alt="pianobar"></p>
+<p>Fantastic, now it logs in auto-magically for us. Select a station and get some music going. I'm in the mood for some Electronica, so I'm going to select that station. </p>
+<pre><code class="language-bash">[?] Select station: 13
+|>  Station "Electronica Radio" (1485406034118058132)
+(i) Receiving new playlist... Ok.</code></pre>
+<p>Now, what's with that funky number after our station name? That happens to be the station ID, and we can have even more fun in our configuration file with that number if we want to, we just add to our config..</p>
+<p><code>$ nano ~/.config/pianobar/config</code></p>
+<pre><code class="language-bash">autostart_station = &lt;stationid>
+
+password = ...
+user = ...</code></pre>
+<p>Easy enough, let's try it out.</p>
+<pre><code class="language-bash">$ pianobar
+Welcome to pianobar (2014.09.28)! Press ? for a list of commands.
+(i) Login... Ok.
+(i) Get stations... Ok.
+|>  Station "Electronica Radio" (1485406034118058132)</code></pre>
+<p>Great looks like everything is working how we want!</p>
+<h1 id="issues">Issues</h1>
+<p>For me, when I first tried to use pianobar I had a problem with my audio driver being alsa. The <a href="https://wiki.archlinux.org/index.php/Pianobar#Troubleshooting">Arch wiki</a> has more details on this, but for me the solution was to change my default driver to pulse. This was pretty painless:</p>
+<p><code>$ sudo nano /etc/libao.conf</code></p>
+<pre><code class="language-bash">default_driver=pulse</code></pre>
+<p>I haven't noticed any issues across the system with this either, and pianobar works great now. This is the only issue I've had, but that doesn't mean there aren't others. If you have a question or a problem with any of the steps I laid out here, make an <a href="https://github.com/NathanBland/NathanBland.github.io/issues/new">issue</a> on my site <a href="https://github.com/NathanBland/NathanBland.github.io/issues">issue tracker</a>.</p>
+<p>Be sure to include the title <strong>Music To My Shell</strong> and the <strong>question</strong> label.</p>
+<p>Thanks for reading, and enjoy the music.</p>
+</div></section></div></div></div><script>window.__NUXT__={layout:"default",data:[{post:'<p>I love music and the way it can put me in the mood to write or develop different things. I&#39;m also currently in love with <a href="https://www.archlinux.org/">Arch Linux</a>, and just Linux in general. So naturally I started looking for CLI music players.</p>\n<p><a href="http://6xq.net/projects/pianobar/">Pianobar</a> is a great little CLI tool that can be used to stream <a href="http://www.pandora.com/">Pandora</a> through your shell, its great and I love everything that it does. </p>\n<h1 id="setup">Setup</h1>\n<p>Installing it is easy enough on arch:</p>\n<p><code>$ sudo pacman -S pianobar</code></p>\n<p>There is also a <a href="https://launchpad.net/ubuntu/+source/pianobar">Ubuntu PPA</a> but I&#39;m not going to cover using that in this article.</p>\n<p>Running it after it has been installed is simple; <code>$ pianobar</code> will do the trick to get it up and running. You will then be presented with a list of stations, mine looks like this:</p>\n<p><strong>Station List</strong>\n<img src="/img/pianobar_stations.png" alt="Station List"></p>\n<p>The one issue with this is that it prompts you for user authentication every time you use it, which is something I figured should be automatic.</p>\n<p>#Configuration#\nA little reading on the <a href="https://wiki.archlinux.org/index.php/Pianobar#Configuration">Arch Wiki</a> revealed that this is quite easy, and even shows a few other things I hadn&#39;t thought of. First things first, we need to make a configuration file, which is straight forward. </p>\n<p>According to the wiki we need to make our configuration file at <code>~/.config/pianobar/config</code> ok great, lets do that!</p>\n<pre><code class="language-bash">$ touch ~/.config/pianobar/config\n\ntouch: cannot touch ‘/home/nathan/.config/pianobar/config’: No such file or directory</code></pre>\n<p>Ok, fine, we&#39;ll go make the directory first.</p>\n<pre><code class="language-bash">$ mkdir ~/.config/pianobar\n$ touch ~/.config/pianobar/config</code></pre>\n<p>Great! Now we have a configuration file to work with. Lets start out with getting some authentication going for us...</p>\n<p><code>$ nano ~/.config/pianobar/config</code></p>\n<pre><code class="language-bash">password = &lt;yourpassword&gt;\nuser = &lt;username&gt;</code></pre>\n<p>Save and exit. Now lets try running pianobar again. <code>$ pianobar</code></p>\n<p><strong>Pianobar automatic login</strong>\n<img src="/img/pianobar_auth.png" alt="pianobar"></p>\n<p>Fantastic, now it logs in auto-magically for us. Select a station and get some music going. I&#39;m in the mood for some Electronica, so I&#39;m going to select that station. </p>\n<pre><code class="language-bash">[?] Select station: 13\n|&gt;  Station &quot;Electronica Radio&quot; (1485406034118058132)\n(i) Receiving new playlist... Ok.</code></pre>\n<p>Now, what&#39;s with that funky number after our station name? That happens to be the station ID, and we can have even more fun in our configuration file with that number if we want to, we just add to our config..</p>\n<p><code>$ nano ~/.config/pianobar/config</code></p>\n<pre><code class="language-bash">autostart_station = &lt;stationid&gt;\n\npassword = ...\nuser = ...</code></pre>\n<p>Easy enough, let&#39;s try it out.</p>\n<pre><code class="language-bash">$ pianobar\nWelcome to pianobar (2014.09.28)! Press ? for a list of commands.\n(i) Login... Ok.\n(i) Get stations... Ok.\n|&gt;  Station &quot;Electronica Radio&quot; (1485406034118058132)</code></pre>\n<p>Great looks like everything is working how we want!</p>\n<h1 id="issues">Issues</h1>\n<p>For me, when I first tried to use pianobar I had a problem with my audio driver being alsa. The <a href="https://wiki.archlinux.org/index.php/Pianobar#Troubleshooting">Arch wiki</a> has more details on this, but for me the solution was to change my default driver to pulse. This was pretty painless:</p>\n<p><code>$ sudo nano /etc/libao.conf</code></p>\n<pre><code class="language-bash">default_driver=pulse</code></pre>\n<p>I haven&#39;t noticed any issues across the system with this either, and pianobar works great now. This is the only issue I&#39;ve had, but that doesn&#39;t mean there aren&#39;t others. If you have a question or a problem with any of the steps I laid out here, make an <a href="https://github.com/NathanBland/NathanBland.github.io/issues/new">issue</a> on my site <a href="https://github.com/NathanBland/NathanBland.github.io/issues">issue tracker</a>.</p>\n<p>Be sure to include the title <strong>Music To My Shell</strong> and the <strong>question</strong> label.</p>\n<p>Thanks for reading, and enjoy the music.</p>\n'}],error:null,serverRendered:!0}</script><script src="/app/141253c2aeff438fe2f6.js" defer></script><script src="/app/869c3815f32aedc64042.js" defer></script><script src="/app/3bb043d6186af0c3f093.js" defer></script><script src="/app/36d444b2aea95af0b32b.js" defer></script><script src="/app/4493c8f6f6002fc1f668.js" defer></script><script src="/app/bd5c746264bb09a88478.js" defer></script><script src="/app/6f6b6daaa30bc13bf9cd.js" defer></script>
   </body>
 </html>

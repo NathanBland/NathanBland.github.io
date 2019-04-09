@@ -8,10 +8,34 @@
       NathanBland
       <span data-v-109bcd90>.dev</span></h1> <h2 class="subtitle" data-v-109bcd90>
       Developer, outdoor enthusiast.
-    </h2></section></div> <div class="links" data-v-10bea7dc><a href="/blog" class="nuxt-link-active" data-v-10bea7dc>Blog</a> <a href="https://github.com/nathanbland" target="_blank" data-v-10bea7dc>GitHub ↗</a> <a href="https://dev.to/nathanabland" target="_blank" data-v-10bea7dc>Dev.to ↗</a> <a href="https://twitter.com/nathanabland" target="_blank" data-v-10bea7dc>Twitter ↗</a></div></nav> <div class="post">{
-  "link": "2015-3-31--Py-this-Flask-part-1",
-  "title": "Py This! Experimenting with Flask - Part 1",
-  "date": "2015-3-31"
-}</div></section></div></div></div><script>window.__NUXT__={layout:"default",data:[{post:{link:"2015-3-31--Py-this-Flask-part-1",title:"Py This! Experimenting with Flask - Part 1",date:"2015-3-31"}}],error:null,serverRendered:!0}</script><script src="/app/141253c2aeff438fe2f6.js" defer></script><script src="/app/869c3815f32aedc64042.js" defer></script><script src="/app/3bb043d6186af0c3f093.js" defer></script><script src="/app/36d444b2aea95af0b32b.js" defer></script><script src="/app/4493c8f6f6002fc1f668.js" defer></script><script src="/app/bd5c746264bb09a88478.js" defer></script><script src="/app/6f6b6daaa30bc13bf9cd.js" defer></script>
+    </h2></section></div> <div class="links" data-v-10bea7dc><a href="/blog" class="nuxt-link-active" data-v-10bea7dc>Blog</a> <a href="https://github.com/nathanbland" target="_blank" data-v-10bea7dc>GitHub ↗</a> <a href="https://dev.to/nathanabland" target="_blank" data-v-10bea7dc>Dev.to ↗</a> <a href="https://twitter.com/nathanabland" target="_blank" data-v-10bea7dc>Twitter ↗</a></div></nav> <div class="post"><p>A while back I started a project called Caster. The main goal of this project was to build out a simple blogging system with the Python framework called <a href="http://flask.pocoo.org/">Flask</a>. However, I found myself distracted with other projects and Caster faded into the background. Today I decided I revist that idea, but with a few more stipulations than last time. </p>
+<p><em>This is part of what will probably end up being a 3 part series.</em></p>
+<p>In terms of features I knew I wanted markdown support for creating posts, I also knew I would want tags and categories for each post. I'm not currently planning to allow multiple users for this, as it will be more of a static site than a WordPress clone. </p>
+<p><strong>The Setup</strong></p>
+<p>The system I'm using to develop this on is running <a href="https://www.archlinux.org/">Arch Linux</a> which is great, but also doesn't come with pip installed. To get that going, I just needed pacman. </p>
+<pre><code class="language-bash">$ sudo pacman -S python-pip</code></pre>
+<p>Now to install virtualenv..</p>
+<pre><code class="language-bash">$ sudo pip install virtualenv</code></pre>
+<p>I already have a <a href="https://github.com/NathanBland/Caster">GitHub repository setup for Caster</a>, so a simple <code>$ git clone</code> got my directory setup. Now I just need a virtualenv, and to activate it.</p>
+<pre><code class="language-bash">$ virtualenv venv
+$ . venv/bin/activate</code></pre>
+<p>Awesome, time to get flask going next..</p>
+<pre><code class="language-bash">$ pip install Flask</code></pre>
+<p><em>As a small note</em>, I'm using <a href="https://www.jetbrains.com/pycharm/download/">PyCharm - Community</a> as an editor, so I had to add the virtual env to its settings, but that was pretty <a href="https://www.jetbrains.com/pycharm/help/adding-existing-virtual-environment.html">straight forward</a>.</p>
+<p><strong>Getting on with it</strong></p>
+<p>Now that setup is done, I can finally start working with Flask. I haven't decided if I want a database yet, so I haven't chosen to do that setup yet. From in PyCharm, in the root of the project folder, I make a new file called <code>server.py</code>.
+Right now I'm just wanting to warm back up to Flask, so I'm going with their <a href="http://flask.pocoo.org/docs/0.10/quickstart/">getting started</a> code, with the edition of <code>app.debug = True</code>.</p>
+<pre><code class="language-python">from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello World!'
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run()</code></pre>
+<p>To be continued...</p>
+</div></section></div></div></div><script>window.__NUXT__={layout:"default",data:[{post:'<p>A while back I started a project called Caster. The main goal of this project was to build out a simple blogging system with the Python framework called <a href="http://flask.pocoo.org/">Flask</a>. However, I found myself distracted with other projects and Caster faded into the background. Today I decided I revist that idea, but with a few more stipulations than last time. </p>\n<p><em>This is part of what will probably end up being a 3 part series.</em></p>\n<p>In terms of features I knew I wanted markdown support for creating posts, I also knew I would want tags and categories for each post. I&#39;m not currently planning to allow multiple users for this, as it will be more of a static site than a WordPress clone. </p>\n<p><strong>The Setup</strong></p>\n<p>The system I&#39;m using to develop this on is running <a href="https://www.archlinux.org/">Arch Linux</a> which is great, but also doesn&#39;t come with pip installed. To get that going, I just needed pacman. </p>\n<pre><code class="language-bash">$ sudo pacman -S python-pip</code></pre>\n<p>Now to install virtualenv..</p>\n<pre><code class="language-bash">$ sudo pip install virtualenv</code></pre>\n<p>I already have a <a href="https://github.com/NathanBland/Caster">GitHub repository setup for Caster</a>, so a simple <code>$ git clone</code> got my directory setup. Now I just need a virtualenv, and to activate it.</p>\n<pre><code class="language-bash">$ virtualenv venv\n$ . venv/bin/activate</code></pre>\n<p>Awesome, time to get flask going next..</p>\n<pre><code class="language-bash">$ pip install Flask</code></pre>\n<p><em>As a small note</em>, I&#39;m using <a href="https://www.jetbrains.com/pycharm/download/">PyCharm - Community</a> as an editor, so I had to add the virtual env to its settings, but that was pretty <a href="https://www.jetbrains.com/pycharm/help/adding-existing-virtual-environment.html">straight forward</a>.</p>\n<p><strong>Getting on with it</strong></p>\n<p>Now that setup is done, I can finally start working with Flask. I haven&#39;t decided if I want a database yet, so I haven&#39;t chosen to do that setup yet. From in PyCharm, in the root of the project folder, I make a new file called <code>server.py</code>.\nRight now I&#39;m just wanting to warm back up to Flask, so I&#39;m going with their <a href="http://flask.pocoo.org/docs/0.10/quickstart/">getting started</a> code, with the edition of <code>app.debug = True</code>.</p>\n<pre><code class="language-python">from flask import Flask\napp = Flask(__name__)\n\n@app.route(&#39;/&#39;)\ndef hello_world():\n    return &#39;Hello World!&#39;\n\nif __name__ == &#39;__main__&#39;:\n    app.debug = True\n    app.run()</code></pre>\n<p>To be continued...</p>\n'}],error:null,serverRendered:!0}</script><script src="/app/141253c2aeff438fe2f6.js" defer></script><script src="/app/869c3815f32aedc64042.js" defer></script><script src="/app/3bb043d6186af0c3f093.js" defer></script><script src="/app/36d444b2aea95af0b32b.js" defer></script><script src="/app/4493c8f6f6002fc1f668.js" defer></script><script src="/app/bd5c746264bb09a88478.js" defer></script><script src="/app/6f6b6daaa30bc13bf9cd.js" defer></script>
   </body>
 </html>

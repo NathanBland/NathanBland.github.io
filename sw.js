@@ -2,10 +2,6 @@ importScripts('/framework/workbox.4c4f5ca6.js')
 
 workbox.precaching.precacheAndRoute([
   {
-    "url": "/framework/1096b9f49f547d8aa723.js",
-    "revision": "54bfc2a280919a5162e4c8ae85ba90a2"
-  },
-  {
     "url": "/framework/194b72fcd0e10d8301b3.js",
     "revision": "26a9639030ae2111a041bd29143b64a8"
   },
@@ -26,12 +22,16 @@ workbox.precaching.precacheAndRoute([
     "revision": "2b197d10d3986bd09adb6ed84cffdb32"
   },
   {
+    "url": "/framework/bfdeda80c6220a30cd60.js",
+    "revision": "4ab50bf130726f1d97ebd4113ebcd46d"
+  },
+  {
     "url": "/framework/cba277142249cd9acc00.js",
     "revision": "ba2b6ae315675b8c76ea7be29763d773"
   },
   {
-    "url": "/framework/e02cd19003d7bda7663e.js",
-    "revision": "2c2528c2b43d4ee8085b492d841f0c37"
+    "url": "/framework/d72615793020c8235651.js",
+    "revision": "a5d516989b24278c495fcf8266cc3fcc"
   },
   {
     "url": "/framework/f941c16bb1cfa212ccb6.js",

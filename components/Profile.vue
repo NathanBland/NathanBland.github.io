@@ -12,7 +12,13 @@
 }
 .profile img {
   box-shadow: 0px 0px 5px black;
-  border-radius: 5%;
+  border-radius: 50%;
   max-width: 100%;
+}
+
+@media (max-width: 780px) {
+  .profile img {
+    max-height: 30vh;
+  }
 }
 </style>

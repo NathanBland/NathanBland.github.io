@@ -27,6 +27,8 @@ export default {
   ** Global CSS
   */
   css: [
+    'highlight.js/styles/default.css',
+    'highlight.js/styles/solarized-dark.css'
   ],
 
   /*
@@ -48,19 +50,24 @@ export default {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    host: process.env.DEPLOY_ENV === 'GH_PAGES' ? 'nathanbland.github.io' : '127.0.0.1',
-    port: process.env.DEPLOY_ENV === 'GH_PAGES' ? 443 : 3000,
-    // baseURL: process.env.NODE_ENV === 'dev' ? 'localhost:3000' : 'nathanbland.github.io'
+    host: process.env.NODE_ENV === 'dev' ?  '127.0.0.1' : 'nathanbland.dev' ,
+    port: process.env.NODE_ENV === 'dev' ? 3000 : 443,
+    // baseURL: process.env.NODE_ENV === 'dev' ? 'localhost:3000' : 'nathanbland.github.io',
+    https: process.env.NODE_ENV === 'dev' ? false : true
 
   },
 
   generate: {
     routes: function () {
+      const marked = require('marked')
+      const fs = require('fs')
       const posts = require('./static/index.json').posts
-      return posts.map((post) => {
+      return posts.map((postMeta) => {
+        const post = fs.readFileSync(`./static/${postMeta.link}.md`, 'utf8').toString()
+        const markedPost = marked(post)
         return {
-          route: '/blog/' + post.link,
-          payload: post
+          route: '/blog/' + postMeta.link,
+          payload: {post: markedPost, meta: postMeta }
         }
       })
     }
@@ -74,7 +81,7 @@ export default {
     ** You can extend webpack config here
     */
 
-    publicPath: '/app/',
+    publicPath: '/framework/',
     // vendor: ['babel-polyfill'],
     // babel: {
     //   presets: [

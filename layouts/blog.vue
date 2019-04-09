@@ -47,39 +47,6 @@ html {
   margin: 0;
 }
 
-.site-grid {
-  background: url('~assets/small_background.jpg');
-  position: relative;
-  display: grid;
-  background-position: center;
-  background-size: cover;
-  width: 100vw;
-  height: 100vh;
-  transition: all .5s cubic-bezier(.55,0,.1,1);
-}
-
-.empty-bg-holder {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  filter: blur(50px);
-  overflow: hidden;
-}
-.empty-bg-holder img {
-  width: 100%;
-  height: 100%;
-}
-.site {
-  z-index: 2;
-}
-
-.page-enter-active, .page-leave-active {
-  transition: opacity 500ms
-}
-.page-enter, .page-leave-active {
-  opacity: 0
-}
-
 @media (max-width: 780px) {
 }
 

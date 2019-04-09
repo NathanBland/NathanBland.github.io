@@ -4,34 +4,15 @@
       to="/">
       <profile />
     </nuxt-link>
-    <h1 class="title">
-      NathanBland
-      <span>.dev</span>
-    </h1>
-    <h2 class="subtitle">
-      Personal web portfolio and playground
-    </h2>
-    <div class="links">
-      <nuxt-link
-        to="/blog"
-        class="button button--green"
-      >Blog</nuxt-link>
-      <a
-        href="https://github.com/nathanbland"
-        target="_blank"
-        class="button button--grey"
-      >GitHub &#8599;</a>
-      <a
-        href="https://dev.to/nathanabland"
-        target="_blank"
-        class="button button--grey"
-      >Dev.to &#8599;</a>
-      <a
-        href="https://twitter/nathanabland"
-        target="_blank"
-        class="button button--grey"
-      >Twitter &#8599;</a>
-    </div>
+    <section class="description">
+      <h1 class="title">
+        NathanBland
+        <span>.dev</span>
+      </h1>
+      <h2 class="subtitle">
+        Developer, outdoor enthusiast.
+      </h2>
+    </section>
   </div>
 </template>
 
@@ -53,14 +34,27 @@ export default {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: flex-start;
+  margin-top: 1em;
 }
 .profile-card h1,h2,h3,a {
   color: white;
   text-shadow: 1px 1px 1px black;
 }
+.title {
+  font-size: 3em;
+}
+.subtitle {
+  font-size: 1.5em;
+}
 .title span {
   margin-left: -.25em;
   color: #989898;
+}
+.description {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
 }
 .nav .links .button {
   margin: .5em 0em;

@@ -1,23 +1,25 @@
 {
-  "name": "NathanBland.github.io",
+  "name": "nathanbland.dev",
   "version": "1.0.0",
   "description": "Personal web portfolio and playground",
   "author": "Nathan Bland",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "NODE_ENV=dev nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
-    "deploy": "DEPLOY_ENV=GH_PAGES npm run generate && gh-pages -d dist -b master"
+    "deploy": "npm run generate && gh-pages -d dist -b master"
   },
   "dependencies": {
-    "cross-env": "^5.2.0",
-    "nuxt": "^2.4.0",
     "@nuxtjs/axios": "^5.3.6",
-    "@nuxtjs/pwa": "^2.6.0"
+    "@nuxtjs/pwa": "^2.6.0",
+    "cross-env": "^5.2.0",
+    "highlight.js": "^9.15.6",
+    "marked": "^0.6.2",
+    "nuxt": "^2.4.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^0.0.1",

@@ -2,44 +2,44 @@ importScripts('/framework/workbox.4c4f5ca6.js')
 
 workbox.precaching.precacheAndRoute([
   {
-    "url": "/framework/211b521cce74b47dd15e.js",
-    "revision": "d5922e7b83c804dc7fbb45f0e9e01185"
+    "url": "/framework/194b72fcd0e10d8301b3.js",
+    "revision": "26a9639030ae2111a041bd29143b64a8"
   },
   {
-    "url": "/framework/2a9d348ff5019a659222.js",
-    "revision": "f5cbaca58247b0de48a026692ef5875a"
+    "url": "/framework/575c874379c1fe58ea79.js",
+    "revision": "1990eed94e095cabe0e5c48e3e468f3f"
   },
   {
-    "url": "/framework/2bf79c4847c6e681b950.js",
-    "revision": "67e31c87f3dc47fa1a78fff4116020f3"
+    "url": "/framework/6022685a990a27f38d85.js",
+    "revision": "dc2fea669ddcd12b37a873429f4839d7"
   },
   {
-    "url": "/framework/2ff0bdd6bcd84fb5ef44.js",
-    "revision": "b9e17b52baef38e600f42c1635af8908"
+    "url": "/framework/83583963ac805593a782.js",
+    "revision": "4806913283c07c1c6d7f13a99de614cf"
   },
   {
-    "url": "/framework/36d444b2aea95af0b32b.js",
-    "revision": "703f8d3e0d50a7b0ff2fdfa63bfd0f2d"
+    "url": "/framework/950bada5b39f02787ed4.js",
+    "revision": "2f42b53814db369184ae1d31dca2fee8"
   },
   {
-    "url": "/framework/3bb043d6186af0c3f093.js",
-    "revision": "6e5f1703098164f9a5d0c2140abc9a84"
+    "url": "/framework/b4a5cb60cffa2ca46899.js",
+    "revision": "2b197d10d3986bd09adb6ed84cffdb32"
   },
   {
-    "url": "/framework/4493c8f6f6002fc1f668.js",
-    "revision": "7ca2dbb01632ef305b725ff49cea600c"
+    "url": "/framework/cba277142249cd9acc00.js",
+    "revision": "ba2b6ae315675b8c76ea7be29763d773"
   },
   {
-    "url": "/framework/7d7a0202df01a964d2a0.js",
-    "revision": "033e0a7872395a1173790eef938a03a8"
+    "url": "/framework/f69ec3eb4a9b2dce33bf.js",
+    "revision": "ae5f0707a34d12cde21eebc0a03d58e2"
   },
   {
-    "url": "/framework/9509a8a8def613103c87.js",
-    "revision": "b70ccb2bdd35bb7a9a1d734166ef6d3a"
+    "url": "/framework/f941c16bb1cfa212ccb6.js",
+    "revision": "20e864793607e7c8147631db4526409a"
   },
   {
-    "url": "/framework/bd5c746264bb09a88478.js",
-    "revision": "c4aef595a26e612050be4e8c1773f038"
+    "url": "/framework/ff79a8c278a4b8c9e621.js",
+    "revision": "2bfa52eb2fb554a60dd9483eb9c7ca87"
   }
 ], {
   "cacheId": "NathanBland.github.io",

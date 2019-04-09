@@ -18,10 +18,6 @@ workbox.precaching.precacheAndRoute([
     "revision": "703f8d3e0d50a7b0ff2fdfa63bfd0f2d"
   },
   {
-    "url": "/app/39e965191d00b9fecf47.js",
-    "revision": "db51bf078c7539e4922fa8a107b74302"
-  },
-  {
     "url": "/app/3bb043d6186af0c3f093.js",
     "revision": "6e5f1703098164f9a5d0c2140abc9a84"
   },
@@ -40,6 +36,10 @@ workbox.precaching.precacheAndRoute([
   {
     "url": "/app/bd5c746264bb09a88478.js",
     "revision": "c4aef595a26e612050be4e8c1773f038"
+  },
+  {
+    "url": "/app/dae659066be7b4123a23.js",
+    "revision": "ef54e5bef38f070fcdc9df31d4a69821"
   }
 ], {
   "cacheId": "NathanBland.github.io",

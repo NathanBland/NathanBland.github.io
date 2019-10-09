@@ -50,10 +50,10 @@ export default {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    host: process.env.NODE_ENV === 'dev' ?  '127.0.0.1' : 'nathanbland.dev' ,
+    host: process.env.NODE_ENV === 'dev' ? '127.0.0.1' : 'nathanbland.dev',
     port: process.env.NODE_ENV === 'dev' ? 3000 : 443,
     // baseURL: process.env.NODE_ENV === 'dev' ? 'localhost:3000' : 'nathanbland.github.io',
-    https: process.env.NODE_ENV === 'dev' ? false : true
+    https: process.env.NODE_ENV !== 'dev'
 
   },
 
@@ -67,7 +67,7 @@ export default {
         const markedPost = marked(post)
         return {
           route: '/blog/' + postMeta.link,
-          payload: {post: markedPost, meta: postMeta }
+          payload: { post: markedPost, meta: postMeta }
         }
       })
     }

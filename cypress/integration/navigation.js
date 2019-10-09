@@ -21,4 +21,7 @@ describe('Site Tests', () => {
     cy.get('.post-body')
       .should('not.be.empty')
   })
+  it('Should be able to navigate back home', () => {
+    cy.get('[href="/"]').click()
+  })
 })

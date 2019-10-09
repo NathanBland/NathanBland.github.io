@@ -23,6 +23,11 @@ pipeline {
          sh 'npm run lint'
       }
     }
+    stage('Build') {
+      steps {
+         sh 'npm run build'
+      }
+    }
     stage('Test') {
       steps {
         sh 'npm run ci'

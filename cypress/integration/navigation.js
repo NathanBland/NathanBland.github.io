@@ -1,4 +1,4 @@
-describe('Site Tests', () => {
+describe('Navigation', () => {
   it('Should be able to open the home page', () => {
     cy.visit('/')
     cy.contains('NathanBland')

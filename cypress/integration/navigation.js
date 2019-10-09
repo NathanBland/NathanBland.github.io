@@ -1,7 +1,7 @@
 describe('Site Tests', () => {
   it('Should be able to open the home page', () => {
     cy.visit('/')
-    cy.contains('NathanBland.dev')
+    cy.contains('NathanBland')
     cy.contains('Blog')
     cy.contains('GitHub')
     cy.contains('Dev.to')

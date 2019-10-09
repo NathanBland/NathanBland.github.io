@@ -8,9 +8,24 @@ pipeline {
   // tools {nodejs "node"}
  
   stages {
-    stage('Example') {
+    stage('Audit Dependencies') {
       steps {
-        sh 'npm config ls'
+        sh 'npm audit'
+      }
+    }
+    stage('Install dependencies') {
+      steps {
+        sh 'npm ci'
+      }
+    }
+    stage('Lint') {
+      steps {
+         sh 'npm run lint'
+      }
+    }
+    stage('Test') {
+      steps {
+        sh 'npm run ci'
       }
     }
   }

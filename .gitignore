@@ -83,5 +83,7 @@ dist
 # Service worker
 sw.*
 
+#ignore test result folders
 cypress/videos/
 cypress/screenshots/
+results/

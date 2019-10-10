@@ -1,7 +1,7 @@
 <template>
   <div class="site-grid">
     <div class="empty-bg-holder">
-      <img class="preload" src="~assets/small_background.jpg"/>
+      <img class="preload" src="~assets/small_background.jpg">
       <!-- <div v-if="isLoaded" class="full-bg"/> -->
     </div>
     <nuxt class="site" />

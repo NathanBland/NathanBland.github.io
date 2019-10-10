@@ -1,17 +1,20 @@
 <template>
   <section class="blog">
     <nav>
-      <profile-card/>
-      <nav-links/>
+      <profile-card />
+      <nav-links />
     </nav>
     <section class="post">
       <div class="post-meta">
-        <h1 class="post-title">{{ postMeta.title }}</h1>
-        <h3 class="post-subtitle">{{ postMeta.date }}</h3>
+        <h1 class="post-title">
+          {{ postMeta.title }}
+        </h1>
+        <h3 class="post-subtitle">
+          {{ postMeta.date }}
+        </h3>
       </div>
 
-      <div class="post-body" v-html="post" >
-      </div>
+      <div class="post-body" v-html="post" />
     </section>
   </section>
 </template>

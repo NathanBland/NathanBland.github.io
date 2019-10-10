@@ -1,16 +1,22 @@
 <template>
   <section class="blog">
     <nav>
-      <profile-card/>
-      <nav-links/>
+      <profile-card />
+      <nav-links />
     </nav>
     <div v-if="posts.length > 0" class="posts-list">
       <nuxt-link v-for="(post) in sortedPosts" :key="post.link" :to="`/blog/${post.link}`" class="post-link">
-        <h1 class="title">{{ post.title }}</h1>
-        <h2 class="subtitle">{{ post.date }}</h2>
+        <h1 class="title">
+          {{ post.title }}
+        </h1>
+        <h2 class="subtitle">
+          {{ post.date }}
+        </h2>
       </nuxt-link>
     </div>
-    <h1 v-else>No posts found :(</h1>
+    <h1 v-else>
+      No posts found :(
+    </h1>
   </section>
 </template>
 

@@ -3,7 +3,9 @@
     <nuxt-link
       to="/blog"
       class=""
-    >Blog</nuxt-link>
+    >
+      Dev Blog
+    </nuxt-link>
     <a
       href="https://github.com/nathanbland"
       target="_blank"

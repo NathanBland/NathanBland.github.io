@@ -1,7 +1,8 @@
 <template>
   <div class="profile-card">
     <nuxt-link
-      to="/">
+      to="/"
+    >
       <profile />
     </nuxt-link>
     <section class="description">

@@ -2,7 +2,7 @@
   <section class="container">
     <profile-card />
     <div class="cover">
-      <nav-links/>
+      <nav-links />
     </div>
   </section>
 </template>

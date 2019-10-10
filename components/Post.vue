@@ -1,6 +1,8 @@
 <template>
   <section class="blog-post">
-    <h1 class="post-title">{{ post.title }}</h1>
+    <h1 class="post-title">
+      {{ post.title }}
+    </h1>
     <div class="post-content">
       <!-- {{ post. }} -->
       content goes here.

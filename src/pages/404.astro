@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+
+<BaseLayout title="Page not found" description="The requested page could not be found.">
+  <section class="not-found">
+    <p class="eyebrow">404</p>
+    <h1 class="section-heading">This trail goes nowhere.</h1>
+    <p class="section-intro">The page may have moved, or perhaps it never existed.</p>
+    <a href="/">Head home <span aria-hidden="true">→</span></a>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found { min-height: 65vh; padding: clamp(4rem, 12vw, 9rem) 0; }
+  .not-found .eyebrow { color: var(--sunset); }
+  .not-found a { background: var(--paper); border-radius: 999px; display: inline-block; font-weight: 750; margin-top: 2rem; padding: 0.8rem 1rem; text-decoration: none; }
+</style>

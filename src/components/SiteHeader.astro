@@ -1,0 +1,86 @@
+---
+const pathname = Astro.url.pathname
+
+const links = [
+  { label: 'Home', href: '/' },
+  { label: 'Writing', href: '/blog' }
+]
+
+const isCurrent = (href: string) => href === '/'
+  ? pathname === '/'
+  : pathname === href || pathname.startsWith(`${href}/`)
+---
+
+<header class="site-header">
+  <a class="wordmark" href="/" aria-label="Nathan Bland, home">
+    <span>Nathan Bland</span><span class="dot">.dev</span>
+  </a>
+  <nav aria-label="Primary navigation">
+    <ul>
+      {links.map((link) => (
+        <li>
+          <a href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    align-items: center;
+    backdrop-filter: blur(18px);
+    background: color-mix(in srgb, var(--ink) 76%, transparent);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0 2rem;
+    padding: 0.8rem 1rem;
+    position: sticky;
+    top: 1rem;
+    z-index: 10;
+  }
+
+  .wordmark {
+    color: var(--paper);
+    font-weight: 750;
+    letter-spacing: -0.03em;
+    text-decoration: none;
+  }
+
+  .dot { color: var(--sunset); }
+
+  ul {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav a {
+    border-radius: 999px;
+    color: var(--mist);
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 650;
+    padding: 0.55rem 0.75rem;
+    text-decoration: none;
+  }
+
+  nav a:hover,
+  nav a[aria-current='page'] {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  @media (max-width: 560px) {
+    .site-header { align-items: flex-start; }
+    .wordmark { padding: 0.55rem 0; }
+    ul { flex-direction: column; text-align: right; }
+    nav a { padding-block: 0.35rem; }
+  }
+</style>

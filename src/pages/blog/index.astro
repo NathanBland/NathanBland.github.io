@@ -1,0 +1,27 @@
+---
+import PostCard from '../../components/PostCard.astro'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { getPublishedPosts } from '../../lib/posts'
+
+const posts = await getPublishedPosts()
+---
+
+<BaseLayout title="Writing" description="Technical notes and experiments from Nathan Bland.">
+  <header class="page-heading">
+    <p class="eyebrow">Writing</p>
+    <h1 class="section-heading">Notes from the trail.</h1>
+    <p class="section-intro">
+      Technical notes and project writeups. Some are new, some are from older versions of this site.
+    </p>
+  </header>
+  <section class="post-grid" aria-label="Articles">
+    {posts.map((post) => <PostCard post={post} />)}
+  </section>
+</BaseLayout>
+
+<style>
+  .page-heading { padding: clamp(2rem, 6vw, 5rem) 0; }
+  .page-heading .eyebrow { color: var(--sunset); }
+  .post-grid { display: grid; gap: 1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); padding-bottom: 3rem; }
+  @media (max-width: 680px) { .post-grid { grid-template-columns: 1fr; } }
+</style>

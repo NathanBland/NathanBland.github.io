@@ -1,22 +1,52 @@
-# NathanBland.github.io
+# nathanbland.dev
 
-> Personal web portfolio and playground
+Nathan Bland's personal portfolio and writing archive, built as a static Astro site with no page-loaded client JavaScript.
 
-## Build Setup
+## Stack
 
-``` bash
-# install dependencies
-$ npm install
+- Astro content collections for archived writing
+- Static GitHub Pages deployment
+- RSS and sitemap endpoints generated at build time
+- Zero page-loaded client JavaScript in the production output
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+## Local development
 
-# build for production and launch server
-$ npm run build
-$ npm start
+Requires Node.js 22.12 or newer and npm. CI runs on Node.js 24. If you use `nvm`, run `nvm use` from the project root.
 
-# generate static project
-$ npm run generate
+```sh
+npm ci
+npm run dev
 ```
 
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+The development server runs at `http://localhost:4321`.
+Run `npm run build` before opening a pull request. It type-checks the site, builds static output, and verifies generated routes and local links.
+
+## Commands
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the local development server |
+| `npm run check` | Validate Astro and TypeScript files |
+| `npm run build` | Validate, build, and verify routes and local links in `dist/` |
+| `npm run preview` | Preview the production build locally |
+
+## Writing
+
+Articles live in `src/content/blog`. Each Markdown file provides validated frontmatter:
+
+```yaml
+---
+slug: Article-URL-Slug
+title: Article title
+description: A concise summary for listings and social cards.
+pubDate: 2026-07-06
+tags: [example]
+draft: false
+---
+```
+
+The `slug` field is the public URL. Existing mixed-case slugs are intentionally preserved so historical links continue to work.
+
+## Deployment
+
+Pull requests run a clean type-check and production build. Pushes to `main` or `master` deploy through GitHub Actions using GitHub Pages. Generated output is not committed to the repository.

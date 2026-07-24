@@ -1,0 +1,50 @@
+---
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  post: CollectionEntry<'blog'>
+}
+
+const { post } = Astro.props
+const date = post.data.pubDate.toLocaleDateString('en-US', {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric'
+})
+---
+
+<article class="post-card">
+  <p><time datetime={post.data.pubDate.toISOString()}>{date}</time></p>
+  <h2><a href={`/blog/${post.data.slug}`}>{post.data.title}</a></h2>
+  <p class="description">{post.data.description}</p>
+  <a class="read" href={`/blog/${post.data.slug}`} aria-label={`Read ${post.data.title}`}>
+    Read article <span aria-hidden="true">→</span>
+  </a>
+</article>
+
+<style>
+  .post-card {
+    background: color-mix(in srgb, var(--paper) 94%, transparent);
+    border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+    border-radius: 1.25rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: 1.4rem;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .post-card:hover {
+    box-shadow: 0 1.25rem 3rem rgb(8 25 34 / 28%);
+    transform: translateY(-3px);
+  }
+
+  p { margin: 0; }
+  time { color: var(--slate); font-size: 0.82rem; font-weight: 750; letter-spacing: 0.06em; text-transform: uppercase; }
+  h2 { font-size: clamp(1.35rem, 2.5vw, 1.75rem); line-height: 1.1; margin: 0.8rem 0; }
+  h2 a { color: var(--ink); text-decoration: none; }
+  .description { color: var(--slate); flex: 1; line-height: 1.6; }
+  .read { color: var(--teal-dark); font-weight: 750; margin-top: 1.2rem; text-decoration: none; }
+  .read:hover { text-decoration: underline; text-underline-offset: 0.25em; }
+</style>

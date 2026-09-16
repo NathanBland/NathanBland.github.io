@@ -18,17 +18,25 @@ const collectFiles = (directory, predicate = () => true) => {
   return files
 }
 
-const blogSlugs = collectFiles(blogRoot, (path) => extname(path) === '.md').map((file) => {
-  const match = readFileSync(file, 'utf8').match(/^slug:\s*['"]?([^'"\r\n]+)['"]?\s*$/m)
+const blogEntries = collectFiles(blogRoot, (path) => extname(path) === '.md').map((file) => {
+  const contents = readFileSync(file, 'utf8')
+  const match = contents.match(/^slug:\s*['"]?([^'"\r\n]+)['"]?\s*$/m)
   if (!match) throw new Error(`Missing slug frontmatter in ${file}`)
-  return match[1]
+  return {
+    slug: match[1],
+    draft: /^draft:\s*true\s*$/m.test(contents)
+  }
 })
 
+const blogSlugs = blogEntries.map((entry) => entry.slug)
+const publishedSlugs = blogEntries.filter((entry) => !entry.draft).map((entry) => entry.slug)
 const duplicateSlugs = blogSlugs.filter((slug, index) => blogSlugs.indexOf(slug) !== index)
 const expectedRoutes = [
   '/',
+  '/experience',
+  '/nathan-bland-resume.pdf',
   '/blog',
-  ...blogSlugs.map((slug) => `/blog/${slug}`),
+  ...publishedSlugs.map((slug) => `/blog/${slug}`),
   '/404.html',
   '/rss.xml',
   '/sitemap.xml'
@@ -50,16 +58,30 @@ const missingRoutes = expectedRoutes.filter(
 
 const files = collectFiles(distRoot)
 
-const missingLinks = new Set()
-for (const file of files.filter((path) => extname(path) === '.html')) {
-  const html = readFileSync(file, 'utf8')
-  for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
+const missingLocalTargets = new Set()
+const verifyLocalTarget = (href, file) => {
+  if (!href.startsWith('/') || href.startsWith('//')) return
+  const pathname = decodeURI(href.split(/[?#]/)[0])
+  if (!routeCandidates(pathname).some((candidate) => existsSync(candidate))) {
+    missingLocalTargets.add(`${href} (from ${file.replace(distRoot, '')})`)
+  }
+}
+
+for (const file of files.filter((path) => ['.css', '.html'].includes(extname(path)))) {
+  const contents = readFileSync(file, 'utf8')
+  for (const match of contents.matchAll(/(?:href|src)="([^"]+)"/g)) {
+    verifyLocalTarget(match[1], file)
+  }
+  for (const match of contents.matchAll(/srcset="([^"]+)"/g)) {
+    for (const candidate of match[1].split(',')) {
+      const href = candidate.trim().split(/\s+/)[0]
+      if (href) verifyLocalTarget(href, file)
+    }
+  }
+  for (const match of contents.matchAll(/url\(\s*['"]?([^'")]+)['"]?\s*\)/g)) {
     const href = match[1]
     if (!href.startsWith('/') || href.startsWith('//')) continue
-    const pathname = decodeURI(href.split(/[?#]/)[0])
-    if (!routeCandidates(pathname).some((candidate) => existsSync(candidate))) {
-      missingLinks.add(`${href} (from ${file.replace(distRoot, '')})`)
-    }
+    verifyLocalTarget(href, file)
   }
 }
 
@@ -67,10 +89,10 @@ const clientScripts = files.filter(
   (path) => extname(path) === '.js' && !path.endsWith('/sw.js')
 )
 
-if (duplicateSlugs.length || missingRoutes.length || missingLinks.size || clientScripts.length) {
+if (duplicateSlugs.length || missingRoutes.length || missingLocalTargets.size || clientScripts.length) {
   if (duplicateSlugs.length) console.error('Duplicate blog slugs:', duplicateSlugs)
   if (missingRoutes.length) console.error('Missing routes:', missingRoutes)
-  if (missingLinks.size) console.error('Broken local links:', [...missingLinks])
+  if (missingLocalTargets.size) console.error('Broken local links or assets:', [...missingLocalTargets])
   if (clientScripts.length) console.error('Unexpected client JavaScript:', clientScripts)
   process.exitCode = 1
 } else {

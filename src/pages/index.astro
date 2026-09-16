@@ -1,16 +1,42 @@
 ---
 import { Image } from 'astro:assets'
+import ActionIcon from '../components/ActionIcon.astro'
+import ExperienceTimeline from '../components/ExperienceTimeline.astro'
 import PostCard from '../components/PostCard.astro'
 import SocialLinks from '../components/SocialLinks.astro'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import profile from '../assets/profile.jpg'
+import { CONTACT_EMAIL } from '../consts'
 import { getPublishedPosts } from '../lib/posts'
 
 const posts = (await getPublishedPosts()).slice(0, 3)
+const hasPosts = posts.length > 0
 ---
+
+<!--
+THESIS: Lead with verified professional evidence instead of a generic developer introduction.
+OWN-WORLD: Dark mountain photography, warm paper surfaces, Alpine Teal, Sunset, ambient depth, and one organic portrait.
+STORY: A hiring reader identifies Nathan’s role, verifies his work history, reads his notes, and emails him.
+FIRST VIEWPORT: Professional copy and email lead in source order. The portrait remains the visual counterweight on desktop and follows the introduction on mobile.
+FORM: Existing-surface extension with no concept seed. A linear experience trail connects the hero to the writing archive.
+-->
 
 <BaseLayout>
   <section class="hero">
+    <div class="intro">
+      <p class="eyebrow">Hello, I’m Nathan</p>
+      <h1>Senior UI<br /><span>Developer.</span></h1>
+      <p>
+        I’m currently at Marriott International. Outside work, I’m usually
+        in the mountains or writing down something I learned.
+      </p>
+      <div class="contact-actions">
+        <a class="email-action action-with-icon" href={`mailto:${CONTACT_EMAIL}`}>
+          Email Nathan<ActionIcon />
+        </a>
+        <SocialLinks />
+      </div>
+    </div>
     <div class="portrait-wrap">
       <Image
         class="portrait"
@@ -21,28 +47,35 @@ const posts = (await getPublishedPosts()).slice(0, 3)
         loading="eager"
       />
     </div>
-    <div class="intro">
-      <p class="eyebrow">Hello, I’m Nathan</p>
-      <h1>Developer.<br /><span>Outdoor enthusiast.</span></h1>
-      <p>
-        I use this site for technical notes, small projects,
-        and notes I want to keep around.
-      </p>
-      <SocialLinks />
-    </div>
   </section>
+
+  <ExperienceTimeline />
 
   <section class="latest" aria-labelledby="latest-heading">
     <div class="latest-heading">
       <div>
-        <p class="eyebrow">From the archive</p>
+        <p class="eyebrow">Writing</p>
         <h2 id="latest-heading">Latest writing</h2>
       </div>
-      <a href="/blog">View all articles <span aria-hidden="true">→</span></a>
+      <a class="action-with-icon" href="/blog">
+        View all articles<ActionIcon />
+      </a>
     </div>
     <div class="post-grid">
-      {posts.map((post) => <PostCard post={post} />)}
+      {hasPosts ? posts.map((post) => <PostCard post={post} headingLevel={3} />) : (
+        <p class="empty-state">No articles published yet.</p>
+      )}
     </div>
+  </section>
+
+  <section class="contact" aria-labelledby="contact-heading">
+    <div>
+      <p class="eyebrow">Contact</p>
+      <h2 id="contact-heading">Email works best.</h2>
+    </div>
+    <a class="contact-link action-with-icon" href={`mailto:${CONTACT_EMAIL}`}>
+      {CONTACT_EMAIL}<ActionIcon />
+    </a>
   </section>
 </BaseLayout>
 
@@ -51,15 +84,19 @@ const posts = (await getPublishedPosts()).slice(0, 3)
     align-items: center;
     display: grid;
     gap: clamp(2rem, 7vw, 6rem);
+    grid-template-areas: 'portrait intro';
     grid-template-columns: minmax(15rem, 0.8fr) 1.2fr;
     min-height: 65vh;
     padding: 2rem clamp(0rem, 3vw, 2rem) 5rem;
   }
+  .hero > * { min-width: 0; }
+  .intro { grid-area: intro; }
 
   .portrait-wrap {
     background: linear-gradient(135deg, var(--teal), var(--sunset));
     border-radius: 48% 52% 45% 55% / 42% 45% 55% 58%;
     box-shadow: 0 2rem 5rem rgb(4 20 29 / 35%);
+    grid-area: portrait;
     padding: 0.35rem;
     transform: rotate(-2deg);
   }
@@ -75,40 +112,139 @@ const posts = (await getPublishedPosts()).slice(0, 3)
   h1 {
     color: var(--paper);
     font-size: clamp(3rem, 8vw, 6.8rem);
-    letter-spacing: -0.065em;
+    letter-spacing: calc(var(--heading-tracking-tight) + var(--heading-tracking-offset));
     line-height: 0.88;
     margin: 0;
+    overflow-wrap: anywhere;
   }
   h1 span { color: var(--teal); }
   .intro > p:not(.eyebrow) {
     color: var(--mist);
     font-size: clamp(1.05rem, 2vw, 1.3rem);
-    line-height: 1.65;
+    line-height: calc(var(--paragraph-leading) + 0.05);
     max-width: 38rem;
   }
 
+  .contact-actions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 1.75rem;
+  }
+
+  .email-action {
+    align-items: center;
+    background: var(--sunset);
+    border: 1px solid transparent;
+    border-radius: 999px;
+    color: var(--ink);
+    display: inline-flex;
+    font-weight: 800;
+    min-height: var(--tap-target);
+    padding: 0.72rem 1rem;
+    text-decoration: none;
+    transition: background-color 160ms ease, transform 160ms ease;
+  }
+
+  .email-action:active { background: var(--sunset-soft); }
+
+  @media (hover: hover) and (pointer: fine) {
+    .email-action:hover {
+      background: var(--sunset-soft);
+      transform: translateY(-2px);
+    }
+  }
+
   .latest {
-    background: rgb(10 31 41 / 72%);
+    background: var(--ink-panel);
     border: 1px solid var(--line);
     border-radius: 1.5rem;
-    padding: clamp(1.25rem, 4vw, 2.5rem);
+    margin-bottom: calc(clamp(3rem, 7vw, 5rem) + var(--section-spacing-offset));
+    padding: calc(clamp(1.25rem, 4vw, 2.5rem) + var(--surface-padding-offset));
   }
-  .latest-heading { align-items: end; display: flex; justify-content: space-between; margin-bottom: 1.5rem; }
-  .latest-heading h2 { color: var(--paper); font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -0.05em; line-height: 1; margin: 0; }
-  .latest-heading > a { color: var(--mist); font-weight: 700; text-decoration: none; }
-  .latest-heading > a:hover { color: var(--sunset); }
+  .latest-heading { align-items: end; display: flex; gap: 1rem; justify-content: space-between; margin-bottom: 1.5rem; }
+  .latest-heading > div { min-width: 0; }
+  .latest-heading h2 { color: var(--paper); font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: calc(var(--heading-tracking-tight) + var(--heading-tracking-offset)); line-height: 1; margin: 0; overflow-wrap: anywhere; }
+  .latest-heading > a {
+    align-items: center;
+    color: var(--mist);
+    display: inline-flex;
+    flex-shrink: 0;
+    font-weight: 700;
+    min-height: var(--tap-target);
+    text-decoration: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .latest-heading > a:hover { color: var(--sunset); }
+  }
   .latest .eyebrow { color: var(--teal); }
-  .post-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
+  .post-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .empty-state {
+    background: rgb(255 253 248 / 92%);
+    border-radius: 1rem;
+    color: var(--ink-soft);
+    grid-column: 1 / -1;
+    line-height: var(--paragraph-leading);
+    margin: 0;
+    padding: 1rem 1.2rem;
+  }
+
+  .contact {
+    align-items: end;
+    border-top: 1px solid var(--line);
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    padding: clamp(2.5rem, 7vw, 5rem) 0 1rem;
+  }
+
+  .contact > div { min-width: 0; }
+  .contact .eyebrow { color: var(--sunset); }
+
+  .contact h2 {
+    color: var(--paper);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: calc(var(--heading-tracking-tight) + var(--heading-tracking-offset));
+    line-height: 1;
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .contact-link {
+    align-items: center;
+    color: var(--teal);
+    display: inline-flex;
+    flex-shrink: 1;
+    font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+    font-weight: 750;
+    min-height: var(--tap-target);
+    overflow-wrap: anywhere;
+    text-align: end;
+    text-underline-offset: 0.25em;
+    transition: color 140ms ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .contact-link:hover { color: var(--sunset); }
+  }
 
   @media (max-width: 840px) {
-    .hero { grid-template-columns: 1fr; padding-top: 1rem; }
-    .portrait-wrap { margin: 0 auto; max-width: 24rem; }
-    .intro { text-align: center; }
-    .intro > p:not(.eyebrow) { margin-inline: auto; }
-    .intro :global(.social-links) { justify-content: center; }
+    .hero {
+      grid-template-areas:
+        'intro'
+        'portrait';
+      grid-template-columns: 1fr;
+      min-height: auto;
+      padding: 1rem clamp(0rem, 3vw, 2rem) 4rem;
+    }
+    .portrait-wrap { margin: 0 auto; max-width: 18rem; }
     .post-grid { grid-template-columns: 1fr; }
   }
+
   @media (max-width: 520px) {
     .latest-heading { align-items: flex-start; flex-direction: column; gap: 1rem; }
+    .contact { align-items: flex-start; flex-direction: column; gap: 1rem; }
+    .contact-link { text-align: start; }
   }
 </style>

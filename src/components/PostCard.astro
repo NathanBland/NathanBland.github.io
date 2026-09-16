@@ -1,50 +1,119 @@
 ---
 import type { CollectionEntry } from 'astro:content'
+import ActionIcon from './ActionIcon.astro'
 
 interface Props {
   post: CollectionEntry<'blog'>
+  headingLevel?: 2 | 3
 }
 
-const { post } = Astro.props
+const { post, headingLevel = 2 } = Astro.props
 const date = post.data.pubDate.toLocaleDateString('en-US', {
   month: 'short',
   day: 'numeric',
   year: 'numeric'
 })
+const archiveCutoff = new Date('2020-01-01T00:00:00.000Z')
+const isArchivedPost = post.data.pubDate < archiveCutoff
+const headingId = `post-${post.data.slug}`
 ---
 
 <article class="post-card">
-  <p><time datetime={post.data.pubDate.toISOString()}>{date}</time></p>
-  <h2><a href={`/blog/${post.data.slug}`}>{post.data.title}</a></h2>
-  <p class="description">{post.data.description}</p>
-  <a class="read" href={`/blog/${post.data.slug}`} aria-label={`Read ${post.data.title}`}>
-    Read article <span aria-hidden="true">→</span>
+  <a class="card-link" href={`/blog/${post.data.slug}`} aria-labelledby={headingId}>
+    <div class="meta">
+      <time datetime={post.data.pubDate.toISOString()}>{date}</time>
+      {isArchivedPost && <span class="archive-label">Archive</span>}
+    </div>
+    {headingLevel === 3
+      ? <h3 id={headingId}>{post.data.title}</h3>
+      : <h2 id={headingId}>{post.data.title}</h2>}
+    <p class="description">{post.data.description}</p>
+    <span class="read action-with-icon" aria-hidden="true">
+      Read article<ActionIcon />
+    </span>
   </a>
 </article>
 
 <style>
   .post-card {
-    background: color-mix(in srgb, var(--paper) 94%, transparent);
+    background: var(--paper-card);
+    border: 1px solid rgb(16 33 43 / 12%);
     border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
     border-radius: 1.25rem;
     box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
     min-height: 100%;
-    padding: 1.4rem;
+    min-width: 0;
     transition: transform 180ms ease, box-shadow 180ms ease;
   }
 
-  .post-card:hover {
+  .card-link {
+    border-radius: inherit;
+    color: inherit;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 100%;
+    min-width: 0;
+    padding: calc(1.4rem + var(--surface-padding-offset));
+    text-decoration: none;
+  }
+
+  .card-link:focus-visible { outline-offset: -4px; }
+
+  .post-card:focus-within {
     box-shadow: 0 1.25rem 3rem rgb(8 25 34 / 28%);
     transform: translateY(-3px);
   }
 
+  .post-card:active { transform: translateY(-1px); }
+
+  @media (hover: hover) and (pointer: fine) {
+    .post-card:hover {
+      box-shadow: 0 1.25rem 3rem rgb(8 25 34 / 28%);
+      transform: translateY(-3px);
+    }
+  }
+
+  .meta {
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 0.75rem;
+    justify-content: space-between;
+  }
+
   p { margin: 0; }
   time { color: var(--slate); font-size: 0.82rem; font-weight: 750; letter-spacing: 0.06em; text-transform: uppercase; }
-  h2 { font-size: clamp(1.35rem, 2.5vw, 1.75rem); line-height: 1.1; margin: 0.8rem 0; }
-  h2 a { color: var(--ink); text-decoration: none; }
-  .description { color: var(--slate); flex: 1; line-height: 1.6; }
-  .read { color: var(--teal-dark); font-weight: 750; margin-top: 1.2rem; text-decoration: none; }
-  .read:hover { text-decoration: underline; text-underline-offset: 0.25em; }
+
+  .archive-label {
+    color: var(--teal-dark);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  :is(h2, h3) {
+    color: var(--ink);
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+    letter-spacing: calc(var(--heading-tracking-compact) + var(--heading-tracking-offset));
+    line-height: 1.1;
+    margin: 0.8rem 0;
+    overflow-wrap: anywhere;
+  }
+  .description { color: var(--slate); flex: 1; line-height: var(--paragraph-leading); overflow-wrap: anywhere; }
+  .read {
+    align-items: center;
+    align-self: flex-start;
+    color: var(--teal-dark);
+    display: inline-flex;
+    font-weight: 750;
+    margin-top: 1.2rem;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .card-link:hover .read { text-decoration: underline; text-underline-offset: 0.25em; }
+  }
 </style>

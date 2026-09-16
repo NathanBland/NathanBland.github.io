@@ -1,5 +1,6 @@
 ---
 import { render, type CollectionEntry } from 'astro:content'
+import ActionIcon from '../../components/ActionIcon.astro'
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import { getPublishedPosts } from '../../lib/posts'
 
@@ -22,6 +23,8 @@ const displayDate = post.data.pubDate.toLocaleDateString('en-US', {
   day: 'numeric',
   year: 'numeric'
 })
+const archiveCutoff = new Date('2020-01-01T00:00:00.000Z')
+const isArchivedPost = post.data.pubDate < archiveCutoff
 const publishedTime = post.data.pubDate.toISOString()
 const canonical = new URL(`/blog/${post.data.slug}`, Astro.site)
 const structuredData = {
@@ -43,14 +46,18 @@ const jsonLd = JSON.stringify(structuredData).replaceAll('<', '\\u003c')
   publishedTime={publishedTime}
 >
   <article class="article-shell">
-    <a class="back" href="/blog"><span aria-hidden="true">←</span> All writing</a>
+    <a class="back action-with-icon" href="/blog">
+      <ActionIcon direction="left" />All writing
+    </a>
     <header>
-      <p class="eyebrow">From the archive</p>
+      <p class="eyebrow">{isArchivedPost ? 'From the archive' : 'Writing'}</p>
       <h1>{post.data.title}</h1>
       <time datetime={publishedTime}>{displayDate}</time>
-      <p class="archive-note">
-        Old post. Formatting cleaned up. Technical details may be dated.
-      </p>
+      {isArchivedPost && (
+        <p class="archive-note">
+          Old post. Formatting cleaned up. Technical details may be dated.
+        </p>
+      )}
     </header>
     <div class="prose">
       <Content />
@@ -61,18 +68,28 @@ const jsonLd = JSON.stringify(structuredData).replaceAll('<', '\\u003c')
 
 <style>
   .article-shell {
-    background: color-mix(in srgb, var(--paper) 96%, transparent);
+    background: var(--paper-article);
     border: 1px solid rgb(255 255 255 / 28%);
     border-radius: 1.5rem;
     box-shadow: var(--shadow);
     margin: clamp(2rem, 6vw, 5rem) auto;
-    max-width: 54rem;
-    padding: clamp(1.3rem, 5vw, 4.5rem);
+    max-width: calc(var(--reading-width) + 10rem);
+    min-width: 0;
+    padding: calc(clamp(1.3rem, 5vw, 4.5rem) + var(--surface-padding-offset));
   }
-  .back { color: var(--teal-dark); font-weight: 750; text-decoration: none; }
-  .back:hover { text-decoration: underline; text-underline-offset: 0.25em; }
-  header { border-bottom: 1px solid #d8e3e2; margin: 3rem 0 2.5rem; padding-bottom: 2rem; }
-  h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); letter-spacing: -0.06em; line-height: 0.98; margin: 0.25rem 0 1.5rem; }
+  .back {
+    align-items: center;
+    color: var(--teal-dark);
+    display: inline-flex;
+    font-weight: 750;
+    min-height: var(--tap-target);
+    text-decoration: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .back:hover { text-decoration: underline; text-underline-offset: 0.25em; }
+  }
+  header { border-bottom: 1px solid var(--article-line); margin: 3rem 0 calc(2.5rem + var(--section-spacing-offset)); padding-bottom: 2rem; }
+  h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); letter-spacing: calc(var(--heading-tracking-tight) + var(--heading-tracking-offset)); line-height: 0.98; margin: 0.25rem 0 1.5rem; overflow-wrap: anywhere; }
   time { color: var(--slate); font-size: 0.9rem; font-weight: 700; }
-  .archive-note { color: var(--slate); font-size: 0.95rem; line-height: 1.6; margin: 1rem 0 0; max-width: 38rem; }
+  .archive-note { color: var(--slate); font-size: 0.95rem; line-height: var(--paragraph-leading); margin: 1rem 0 0; max-width: 38rem; }
 </style>

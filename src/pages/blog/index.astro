@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 import { getPublishedPosts } from '../../lib/posts'
 
 const posts = await getPublishedPosts()
+const hasPosts = posts.length > 0
 ---
 
 <BaseLayout title="Writing" description="Technical notes and experiments from Nathan Bland.">
@@ -15,13 +16,24 @@ const posts = await getPublishedPosts()
     </p>
   </header>
   <section class="post-grid" aria-label="Articles">
-    {posts.map((post) => <PostCard post={post} />)}
+    {hasPosts ? posts.map((post) => <PostCard post={post} />) : (
+      <p class="empty-state">No articles published yet.</p>
+    )}
   </section>
 </BaseLayout>
 
 <style>
-  .page-heading { padding: clamp(2rem, 6vw, 5rem) 0; }
+  .page-heading { margin-bottom: var(--section-spacing-offset); padding: clamp(2rem, 6vw, 5rem) 0; }
   .page-heading .eyebrow { color: var(--sunset); }
   .post-grid { display: grid; gap: 1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); padding-bottom: 3rem; }
+  .empty-state {
+    background: rgb(255 253 248 / 92%);
+    border-radius: 1rem;
+    color: var(--ink-soft);
+    grid-column: 1 / -1;
+    line-height: var(--paragraph-leading);
+    margin: 0;
+    padding: 1rem 1.2rem;
+  }
   @media (max-width: 680px) { .post-grid { grid-template-columns: 1fr; } }
 </style>

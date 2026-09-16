@@ -1,13 +1,6 @@
 # nathanbland.dev
 
-Nathan Bland's personal portfolio and writing archive, built as a static Astro site with no page-loaded client JavaScript.
-
-## Stack
-
-- Astro content collections for archived writing
-- Static GitHub Pages deployment
-- RSS and sitemap endpoints generated at build time
-- Zero page-loaded client JavaScript in the production output
+My personal portfolio and writing archive, built as a static Astro site with no page-loaded client JavaScript.
 
 ## Local development
 
@@ -29,6 +22,9 @@ Run `npm run build` before opening a pull request. It type-checks the site, buil
 | `npm run check` | Validate Astro and TypeScript files |
 | `npm run build` | Validate, build, and verify routes and local links in `dist/` |
 | `npm run preview` | Preview the production build locally |
+| `npm run resume` | Regenerate the downloadable resume PDF |
+
+`src/data/resume.json` is the source for the homepage work history, the full experience page, and the downloadable PDF. `npm run dev` and `npm run build` regenerate the PDF before Astro starts.
 
 ## Writing
 

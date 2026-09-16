@@ -2,13 +2,6 @@
 
 My personal portfolio and writing archive, built as a static Astro site with no page-loaded client JavaScript.
 
-## Stack
-
-- Astro content collections for archived writing
-- Static GitHub Pages deployment
-- RSS and sitemap endpoints generated at build time
-- Zero page-loaded client JavaScript in the production output
-
 ## Local development
 
 Requires Node.js 22.12 or newer and npm. CI runs on Node.js 24. If you use `nvm`, run `nvm use` from the project root.

@@ -1,12 +1,19 @@
 ---
 import { SOCIAL_LINKS } from '../consts'
+import ActionIcon from './ActionIcon.astro'
 ---
 
-<ul class="social-links" aria-label="Nathan elsewhere on the web">
+<ul class="social-links" aria-label="More ways to find Nathan">
   {SOCIAL_LINKS.map((link) => (
     <li>
-      <a href={link.href} rel="me noopener noreferrer" target="_blank">
-        {link.label}<span aria-hidden="true"> ↗</span>
+      <a
+        class="action-with-icon"
+        href={link.href}
+        rel={link.external ? 'me noopener noreferrer' : undefined}
+        target={link.external ? '_blank' : undefined}
+        aria-label={link.external ? `${link.label}, opens in a new tab` : undefined}
+      >
+        {link.label}<ActionIcon direction={link.external ? 'up-right' : 'right'} />
       </a>
     </li>
   ))}
@@ -18,24 +25,54 @@ import { SOCIAL_LINKS } from '../consts'
     flex-wrap: wrap;
     gap: 0.65rem;
     list-style: none;
-    margin: 1.5rem 0 0;
+    margin: 0;
     padding: 0;
   }
 
+  li { min-width: 0; }
+
   a {
+    align-items: center;
     background: var(--paper);
     border: 1px solid transparent;
     border-radius: 999px;
     color: var(--ink);
-    display: inline-block;
+    display: inline-flex;
     font-weight: 700;
+    min-height: var(--tap-target);
     padding: 0.72rem 1rem;
     text-decoration: none;
-    transition: transform 160ms ease, background 160ms ease;
+    transition: background-color 160ms ease, transform 160ms ease;
   }
 
-  a:hover {
+  a:active {
     background: var(--sunset-soft);
-    transform: translateY(-2px);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    a:hover {
+      background: var(--sunset-soft);
+      transform: translateY(-2px);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .social-links {
+      display: grid;
+      gap: 0.5rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      width: 100%;
+    }
+
+    a {
+      justify-content: center;
+      padding-inline: 0.65rem;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 350px) {
+    .social-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    li:last-child { grid-column: 1 / -1; }
   }
 </style>

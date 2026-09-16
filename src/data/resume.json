@@ -1,0 +1,128 @@
+{
+  "name": "Nathan Bland",
+  "headline": "Senior UI Developer",
+  "summary": "Senior UI developer focused on React, TypeScript, product interfaces, and the systems that support them.",
+  "email": "nathan.bland@gmail.com",
+  "website": "https://nathanbland.dev",
+  "linkedin": "https://www.linkedin.com/in/nathan-bland-39177766",
+  "github": "https://github.com/nathanbland",
+  "experience": [
+    {
+      "role": "Senior UI Developer",
+      "company": "Marriott International",
+      "period": "July 2024 to present",
+      "location": "Remote",
+      "current": true,
+      "featured": true,
+      "summary": "Primary implementer across internal developer-platform and property-management applications, with supporting backend work in Python and FastAPI.",
+      "highlights": [
+        "Built core React and TypeScript features for an internal developer platform, including dashboards, data tables, entity views, activity updates, and schema-driven forms.",
+        "Carried out frontend modernization work, including upgrades to React 19 and Tailwind 4, a component-library migration, a form-library migration, and a move toward server-side data loading.",
+        "Built features for a second internal application, including routing, authenticated sessions, onboarding forms, data tables, real-time notifications, and tests.",
+        "Added Python and FastAPI features for query filtering, multi-source data enrichment, session preferences, and real-time service updates.",
+        "Implemented OIDC and SSO integrations, WebSocket updates, and session-expiry handling across internal applications.",
+        "Wrote Vitest, Testing Library, and pytest coverage alongside feature work and maintained frontend quality and build tooling."
+      ],
+      "tools": ["React", "TypeScript", "TanStack", "Tailwind CSS", "Python", "FastAPI", "WebSockets", "OIDC/SSO", "Vitest", "pytest"]
+    },
+    {
+      "role": "Senior Software Engineer",
+      "company": "Tackle.io",
+      "period": "September 2021 to July 2024",
+      "location": "",
+      "current": false,
+      "featured": true,
+      "summary": "Built and maintained front-end features and shared components.",
+      "highlights": [
+        "Worked primarily with React, TypeScript, and Apollo GraphQL."
+      ],
+      "tools": ["React", "TypeScript", "Apollo GraphQL"]
+    },
+    {
+      "role": "Software Engineer",
+      "company": "Upland Kapost",
+      "period": "November 2019 to September 2021",
+      "location": "Boulder, Colorado",
+      "current": false,
+      "featured": true,
+      "summary": "Built new product features and updated legacy interfaces.",
+      "highlights": [
+        "Worked across Vue and React applications and helped maintain the deployment process.",
+        "Added end-to-end coverage with Cypress."
+      ],
+      "tools": ["Vue", "Vuetify", "Vue Apollo", "React", "Cypress"]
+    },
+    {
+      "role": "QA Automation Engineer",
+      "company": "EMC",
+      "period": "August 2015 to November 2019",
+      "location": "",
+      "current": false,
+      "featured": true,
+      "summary": "Developed end-to-end test automation for a web-based management platform.",
+      "highlights": [],
+      "tools": []
+    },
+    {
+      "role": "Web Developer Intern",
+      "company": "ComplyTrax",
+      "period": "2014",
+      "location": "",
+      "current": false,
+      "featured": false,
+      "summary": "Helped move server-rendered ASP.NET views to .NET MVC as part of the product's full-stack development.",
+      "highlights": [],
+      "tools": ["ASP.NET", ".NET MVC"]
+    },
+    {
+      "role": "Freelance Web Developer",
+      "company": "The TNB Group",
+      "period": "August 2011 to July 2015",
+      "location": "",
+      "current": false,
+      "featured": false,
+      "summary": "Built custom websites and web applications for small businesses based on client needs.",
+      "highlights": [],
+      "tools": ["Joomla", "WordPress"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "build-logger",
+      "label": "Test collection tool",
+      "summary": "An internal application that collected and organized test results, including videos and screenshots captured during each run. Results were searchable by branch, build, test, and release.",
+      "tools": ["Express", "Vue", "Docker"]
+    },
+    {
+      "name": "RadioRoom",
+      "label": "Shared music listening",
+      "summary": "A web application where people could create rooms and listen to synchronized music together.",
+      "tools": ["Express", "Vue", "MongoDB", "Socket.IO"]
+    }
+  ],
+  "skills": [
+    {
+      "label": "Frontend",
+      "items": ["JavaScript", "TypeScript", "React", "Vue", "Nuxt", "HTML", "CSS"]
+    },
+    {
+      "label": "Data and APIs",
+      "items": ["GraphQL", "Apollo", "MongoDB", "Node.js", "Express"]
+    },
+    {
+      "label": "Testing and delivery",
+      "items": ["Cypress", "End-to-end automation", "Docker", "Git", "Linux"]
+    }
+  ],
+  "education": {
+    "school": "Union Adventist University",
+    "degree": "Bachelor of Science in Computer Science",
+    "period": "2011 to 2015"
+  },
+  "certifications": [
+    {
+      "name": "TestOut Network Pro",
+      "issuer": "TestOut Corporation"
+    }
+  ]
+}

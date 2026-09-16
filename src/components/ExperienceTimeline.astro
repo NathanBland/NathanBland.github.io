@@ -1,0 +1,289 @@
+---
+import { EDUCATION, EXPERIENCE } from '../consts'
+import ActionIcon from './ActionIcon.astro'
+---
+
+<section class="experience" aria-labelledby="experience-heading">
+  <div class="experience-intro">
+    <p class="eyebrow">Work</p>
+    <h2 id="experience-heading">Experience</h2>
+    <p>UI development, software engineering, and test automation since 2015.</p>
+    <a class="experience-link action-with-icon" href="/experience">
+      View full experience<ActionIcon />
+    </a>
+  </div>
+
+  <div class="experience-record">
+    <ol class="timeline">
+      {EXPERIENCE.map((item) => (
+        <li class:list={{ current: item.current }}>
+          <span class="trail-marker" aria-hidden="true"></span>
+          <div class="role-heading">
+            <div>
+              <h3>{item.role}</h3>
+              <p class="company">{item.company}</p>
+            </div>
+            {item.current && <span class="current-status">Current role</span>}
+          </div>
+          <p class="period">
+            {item.period}
+            {'location' in item && item.location ? ` · ${item.location}` : ''}
+          </p>
+        </li>
+      ))}
+    </ol>
+
+    <section class="education" aria-labelledby="education-heading">
+      <p class="eyebrow">Education</p>
+      <h3 id="education-heading">{EDUCATION.school}</h3>
+      <p>{EDUCATION.degree}</p>
+      <p class="period">{EDUCATION.period}</p>
+    </section>
+  </div>
+</section>
+
+<style>
+  .experience {
+    background: var(--paper-article);
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow);
+    display: grid;
+    gap: clamp(2rem, 6vw, 5rem);
+    grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 1.3fr);
+    margin-bottom: calc(clamp(3rem, 7vw, 5rem) + var(--section-spacing-offset));
+    overflow: hidden;
+    padding: calc(clamp(1.5rem, 5vw, 4rem) + var(--surface-padding-offset));
+  }
+
+  .experience-intro {
+    align-self: start;
+    min-width: 0;
+  }
+
+  .experience-intro .eyebrow { color: var(--teal-dark); }
+
+  .experience-intro h2 {
+    color: var(--ink);
+    font-size: clamp(2rem, 6vw, 4rem);
+    letter-spacing: calc(var(--heading-tracking-tight) + var(--heading-tracking-offset));
+    line-height: 0.98;
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .experience-intro > p:not(.eyebrow) {
+    color: var(--slate);
+    font-size: 1.05rem;
+    line-height: calc(var(--paragraph-leading) + 0.1);
+    margin: 1rem 0 0;
+    max-width: 28rem;
+  }
+
+  .experience-link {
+    align-items: center;
+    color: var(--teal-dark);
+    display: inline-flex;
+    font-weight: 750;
+    margin-top: 1rem;
+    min-height: var(--tap-target);
+    text-underline-offset: 0.22em;
+  }
+
+  .experience-record { min-width: 0; }
+
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .timeline li {
+    min-width: 0;
+    padding: 0 0 2.2rem 2rem;
+    position: relative;
+  }
+
+  .timeline li::before {
+    background: var(--article-line);
+    content: '';
+    inset-block: 0 -0.1rem;
+    inset-inline-start: 0.34rem;
+    position: absolute;
+    width: 1px;
+  }
+
+  .timeline li::after {
+    background: linear-gradient(var(--teal-dark), var(--teal));
+    content: '';
+    inset-block: 0 -0.1rem;
+    inset-inline-start: 0.34rem;
+    position: absolute;
+    transform: scaleY(0);
+    transform-origin: top;
+    width: 1px;
+  }
+
+  .timeline li:last-child { padding-bottom: 0.5rem; }
+  .timeline li:last-child::before,
+  .timeline li:last-child::after { inset-block-end: calc(100% - 0.8rem); }
+
+  .trail-marker {
+    background: var(--paper);
+    border: 2px solid var(--teal-dark);
+    border-radius: 50%;
+    height: 0.72rem;
+    inset-block-start: 0.25rem;
+    inset-inline-start: 0;
+    position: absolute;
+    width: 0.72rem;
+    z-index: 1;
+  }
+
+  .current .trail-marker {
+    background: var(--sunset);
+    border-color: var(--ink);
+  }
+
+  @supports (animation-timeline: view()) {
+    .timeline li::after {
+      --role-view-timeline: view();
+      animation-duration: 1ms;
+      animation-fill-mode: both;
+      animation-name: trace-trail-segment;
+      animation-range: entry 15% cover 55%;
+      animation-timeline: var(--role-view-timeline);
+      animation-timing-function: linear;
+    }
+
+    .trail-marker {
+      --role-view-timeline: view();
+      animation-duration: 1ms;
+      animation-fill-mode: both;
+      animation-name: mark-trail-stop;
+      animation-range: entry 20% cover 42%;
+      animation-timeline: var(--role-view-timeline);
+      animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .current .trail-marker {
+      animation-name: mark-current-stop;
+    }
+  }
+
+  @keyframes trace-trail-segment {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+  }
+
+  @keyframes mark-trail-stop {
+    0% {
+      background: var(--paper);
+      border-color: var(--teal-dark);
+      transform: scale(0.78);
+    }
+    70% {
+      background: var(--teal);
+      border-color: var(--teal-dark);
+      transform: scale(1.12);
+    }
+    100% {
+      background: var(--teal-dark);
+      border-color: var(--teal-dark);
+      transform: scale(1);
+    }
+  }
+
+  @keyframes mark-current-stop {
+    0% {
+      background: var(--paper);
+      border-color: var(--teal-dark);
+      transform: scale(0.78);
+    }
+    70% {
+      background: var(--sunset);
+      border-color: var(--ink);
+      transform: scale(1.16);
+    }
+    100% {
+      background: var(--sunset);
+      border-color: var(--ink);
+      transform: scale(1);
+    }
+  }
+
+  .role-heading {
+    align-items: flex-start;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .role-heading > div { min-width: 0; }
+
+  h3 {
+    color: var(--ink);
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+    letter-spacing: calc(var(--heading-tracking-compact) + var(--heading-tracking-offset));
+    line-height: 1.15;
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .company {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0.3rem 0 0;
+  }
+
+  .period {
+    color: var(--slate);
+    font-size: 0.9rem;
+    font-weight: 650;
+    line-height: calc(var(--paragraph-leading) - 0.05);
+    margin: 0.55rem 0 0;
+  }
+
+  .current-status {
+    color: var(--teal-dark);
+    flex-shrink: 0;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .education {
+    border-top: 1px solid var(--article-line);
+    margin-top: 2rem;
+    padding-top: 2rem;
+  }
+
+  .education .eyebrow {
+    color: var(--sunset);
+    margin-bottom: 0.65rem;
+  }
+
+  .education > p:not(.eyebrow, .period) {
+    color: var(--ink-soft);
+    line-height: var(--paragraph-leading);
+    margin: 0.35rem 0 0;
+  }
+
+  @media (max-width: 760px) {
+    .experience { grid-template-columns: 1fr; }
+    .experience-intro > p:not(.eyebrow) { max-width: 38rem; }
+  }
+
+  @media (max-width: 440px) {
+    .role-heading { display: block; }
+    .current-status { display: inline-block; margin-top: 0.6rem; }
+    .timeline li { padding-inline-start: 1.65rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .timeline li::after { animation: none; display: none; }
+    .trail-marker { animation: none; }
+  }
+</style>

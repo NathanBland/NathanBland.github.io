@@ -1,0 +1,803 @@
+---
+const fontOptions = [
+  { value: 'humanist', label: 'Humanist sans' },
+  { value: 'forest', label: 'Forest Service sans' },
+  { value: 'trailhead', label: 'Trailhead condensed' },
+  { value: 'system', label: 'System sans' },
+  { value: 'neutral', label: 'Neutral sans' },
+  { value: 'book', label: 'Book serif' },
+  { value: 'interpretive', label: 'Interpretive slab' },
+  { value: 'fieldGuide', label: 'Field guide serif' },
+  { value: 'mono', label: 'Monospace' }
+]
+---
+
+<!--
+THESIS: Make visual tuning immediate without turning the public portfolio into a design tool.
+OWN-WORLD: Warm parchment, dark cocoa text, one clay accent, quiet line icons, and compact native controls.
+STORY: Nathan opens the panel, adjusts type and rhythm against real content, then copies the chosen CSS values.
+FIRST VIEWPORT: A small Design pill stays at the lower right. Its panel opens upward with font controls first and reset or copy actions last.
+FORM: A development-only settings popover extending the existing page. No production markup, styles, storage, or client JavaScript.
+-->
+
+<details class="dev-tuner" id="dev-tuner">
+  <summary>
+    <svg aria-hidden="true" viewBox="0 0 20 20">
+      <path d="M4 5h12M4 10h12M4 15h12"></path>
+      <circle cx="8" cy="5" r="1.5"></circle>
+      <circle cx="13" cy="10" r="1.5"></circle>
+      <circle cx="7" cy="15" r="1.5"></circle>
+    </svg>
+    <span>Design</span>
+  </summary>
+
+  <section class="dev-tuner__panel" aria-labelledby="dev-tuner-title">
+    <header>
+      <div>
+        <p class="dev-tuner__kicker">Development only</p>
+        <h2 id="dev-tuner-title">Tune the page</h2>
+      </div>
+      <span class="dev-tuner__mark" aria-hidden="true">Aa</span>
+    </header>
+
+    <p class="dev-tuner__intro">
+      Adjust the live page, then copy the values you want to keep.
+    </p>
+
+    <form id="dev-tuner-form">
+      <label class="dev-tuner__field" for="dev-font">
+        <span class="dev-tuner__label">
+          <svg aria-hidden="true" viewBox="0 0 20 20">
+            <path d="M4 16 9 4h2l5 12M6 12h8"></path>
+          </svg>
+          Interface typeface
+        </span>
+        <select
+          id="dev-font"
+          name="font"
+          aria-label="Interface typeface"
+          aria-describedby="dev-font-hint"
+        >
+          {fontOptions.map((option) => (
+            <option value={option.value} selected={option.value === 'trailhead'}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        <span class="dev-tuner__hint" id="dev-font-hint">
+          Changing the typeface also loads its layout preset.
+        </span>
+      </label>
+
+      <div class="dev-tuner__fields">
+        <p class="dev-tuner__group">Type rhythm</p>
+
+        <label class="dev-tuner__field" for="dev-size">
+          <span class="dev-tuner__label">
+            <svg aria-hidden="true" viewBox="0 0 20 20">
+              <path d="M4 5h12M10 5v11M7 16h6"></path>
+            </svg>
+            Base size
+          </span>
+          <span class="dev-tuner__range">
+            <input id="dev-size" name="size" type="range" min="14" max="20" step="0.5" value="16" />
+            <output for="dev-size" data-output="size">16 px</output>
+          </span>
+        </label>
+
+        <label class="dev-tuner__field" for="dev-word-spacing">
+          <span class="dev-tuner__label">
+            <svg aria-hidden="true" viewBox="0 0 20 20">
+              <path d="M3 6v8M17 6v8M3 10h4M13 10h4"></path>
+              <path d="m6 8 2 2-2 2M14 8l-2 2 2 2"></path>
+            </svg>
+            Word spacing
+          </span>
+          <span class="dev-tuner__range">
+            <input
+              id="dev-word-spacing"
+              name="wordSpacing"
+              type="range"
+              min="-0.08"
+              max="0.16"
+              step="0.005"
+              value="0"
+            />
+            <output for="dev-word-spacing" data-output="wordSpacing">0 em</output>
+          </span>
+        </label>
+
+        <label class="dev-tuner__field" for="dev-letter-spacing">
+          <span class="dev-tuner__label">
+            <svg aria-hidden="true" viewBox="0 0 20 20">
+              <path d="M3 15 7 5h1l4 10M5 11h5M14 7v6M12 9l2-2 2 2M12 11l2 2 2-2"></path>
+            </svg>
+            Body letter spacing
+          </span>
+          <span class="dev-tuner__range">
+            <input
+              id="dev-letter-spacing"
+              name="letterSpacing"
+              type="range"
+              min="-0.03"
+              max="0.08"
+              step="0.005"
+              value="0"
+            />
+            <output for="dev-letter-spacing" data-output="letterSpacing">0 em</output>
+          </span>
+        </label>
+
+        <label class="dev-tuner__field" for="dev-heading-tracking">
+          <span class="dev-tuner__label">
+            <svg aria-hidden="true" viewBox="0 0 20 20">
+              <path d="M4 15 8 5h1l4 10M6 11h5M14 6v8M12 8l2-2 2 2"></path>
+            </svg>
+            Heading tracking
+          </span>
+          <span class="dev-tuner__range">
+            <input
+              id="dev-heading-tracking"
+              name="headingTracking"
+              type="range"
+              min="-0.02"
+              max="0.04"
+              step="0.005"
+              value="0"
+            />
+            <output for="dev-heading-tracking" data-output="headingTracking">0 em</output>
+          </span>
+        </label>
+
+        <label class="dev-tuner__field" for="dev-leading">
+          <span class="dev-tuner__label">
+            <svg aria-hidden="true" viewBox="0 0 20 20">
+              <path d="M4 6h8M4 10h8M4 14h8M16 5v10M14 7l2-2 2 2M14 13l2 2 2-2"></path>
+            </svg>
+            Paragraph leading
+          </span>
+          <span class="dev-tuner__range">
+            <input
+              id="dev-leading"
+              name="leading"
+              type="range"
+              min="1.4"
+              max="1.9"
+              step="0.05"
+              value="1.6"
+            />
+            <output for="dev-leading" data-output="leading">Site default</output>
+          </span>
+        </label>
+
+        <p class="dev-tuner__group">Actions</p>
+
+        <label class="dev-tuner__field" for="dev-icon-scale">
+          <span class="dev-tuner__label">
+            <svg aria-hidden="true" viewBox="0 0 20 20">
+              <path d="M6 14 14 6M8 6h6v6"></path>
+              <circle cx="6" cy="14" r="2"></circle>
+            </svg>
+            Icon scale
+          </span>
+          <span class="dev-tuner__range">
+            <input
+              id="dev-icon-scale"
+              name="iconScale"
+              type="range"
+              min="0.8"
+              max="1.4"
+              step="0.05"
+              value="1"
+            />
+            <output for="dev-icon-scale" data-output="iconScale">100%</output>
+          </span>
+        </label>
+
+        <label class="dev-tuner__field" for="dev-icon-gap">
+          <span class="dev-tuner__label">
+            <svg aria-hidden="true" viewBox="0 0 20 20">
+              <path d="M4 6v8M16 6v8M7 10h6M9 8l-2 2 2 2M11 8l2 2-2 2"></path>
+            </svg>
+            Icon spacing
+          </span>
+          <span class="dev-tuner__range">
+            <input
+              id="dev-icon-gap"
+              name="iconGap"
+              type="range"
+              min="0"
+              max="0.75"
+              step="0.05"
+              value="0.25"
+            />
+            <output for="dev-icon-gap" data-output="iconGap">0.25 em</output>
+          </span>
+        </label>
+
+        <p class="dev-tuner__group">Layout</p>
+
+        <label class="dev-tuner__field" for="dev-content-width">
+          <span class="dev-tuner__label">
+            <svg aria-hidden="true" viewBox="0 0 20 20">
+              <path d="M3 5v10M17 5v10M3 10h14M6 8l-3 2 3 2M14 8l3 2-3 2"></path>
+            </svg>
+            Page width
+          </span>
+          <span class="dev-tuner__range">
+            <input
+              id="dev-content-width"
+              name="contentWidth"
+              type="range"
+              min="64"
+              max="84"
+              step="1"
+              value="74"
+            />
+            <output for="dev-content-width" data-output="contentWidth">74 rem</output>
+          </span>
+        </label>
+
+        <label class="dev-tuner__field" for="dev-reading-width">
+          <span class="dev-tuner__label">
+            <svg aria-hidden="true" viewBox="0 0 20 20">
+              <path d="M4 5h12M4 9h10M4 13h12M4 17h8"></path>
+            </svg>
+            Reading width
+          </span>
+          <span class="dev-tuner__range">
+            <input
+              id="dev-reading-width"
+              name="readingWidth"
+              type="range"
+              min="38"
+              max="50"
+              step="1"
+              value="44"
+            />
+            <output for="dev-reading-width" data-output="readingWidth">44 rem</output>
+          </span>
+        </label>
+
+        <label class="dev-tuner__field" for="dev-surface-padding">
+          <span class="dev-tuner__label">
+            <svg aria-hidden="true" viewBox="0 0 20 20">
+              <rect x="3" y="3" width="14" height="14" rx="2"></rect>
+              <rect x="7" y="7" width="6" height="6" rx="1"></rect>
+            </svg>
+            Surface padding
+          </span>
+          <span class="dev-tuner__range">
+            <input
+              id="dev-surface-padding"
+              name="surfacePadding"
+              type="range"
+              min="-8"
+              max="16"
+              step="2"
+              value="0"
+            />
+            <output for="dev-surface-padding" data-output="surfacePadding">0 px</output>
+          </span>
+        </label>
+
+        <label class="dev-tuner__field" for="dev-section-gap">
+          <span class="dev-tuner__label">
+            <svg aria-hidden="true" viewBox="0 0 20 20">
+              <path d="M4 4h12v3H4zM4 13h12v3H4zM10 8v4M8 10h4"></path>
+            </svg>
+            Section spacing
+          </span>
+          <span class="dev-tuner__range">
+            <input
+              id="dev-section-gap"
+              name="sectionGap"
+              type="range"
+              min="-24"
+              max="48"
+              step="4"
+              value="0"
+            />
+            <output for="dev-section-gap" data-output="sectionGap">0 px</output>
+          </span>
+        </label>
+      </div>
+
+      <div class="dev-tuner__footer">
+        <div class="dev-tuner__actions">
+          <button type="reset">Reset</button>
+          <button class="dev-tuner__copy" type="button" data-copy-values>
+            <svg aria-hidden="true" viewBox="0 0 20 20">
+              <rect x="7" y="7" width="9" height="9" rx="2"></rect>
+              <path d="M13 7V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h1"></path>
+            </svg>
+            Copy CSS
+          </button>
+        </div>
+        <p class="dev-tuner__status" aria-live="polite" data-tuner-status></p>
+      </div>
+    </form>
+  </section>
+</details>
+
+<style is:global>
+  .dev-tuner {
+    --dev-clay: #99452f;
+    --dev-cocoa: #2d2926;
+    --dev-control: #83796d;
+    --dev-muted: #716b63;
+    --dev-paper: #f7f4ed;
+    --dev-paper-deep: #eee9df;
+    --dev-rule: #d8d1c4;
+    bottom: max(16px, env(safe-area-inset-bottom, 0px));
+    color: var(--dev-cocoa);
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    position: fixed;
+    right: max(16px, env(safe-area-inset-right, 0px));
+    text-align: start;
+    word-spacing: normal;
+    z-index: 90;
+  }
+
+  .dev-tuner > summary {
+    align-items: center;
+    background: var(--dev-paper);
+    border: 1px solid var(--dev-rule);
+    border-radius: 999px;
+    box-shadow: 0 0.6rem 1.8rem rgb(45 41 38 / 18%);
+    cursor: pointer;
+    display: flex;
+    font-weight: 700;
+    gap: 0.45rem;
+    justify-content: center;
+    list-style: none;
+    margin-left: auto;
+    min-height: 2.75rem;
+    padding: 0.65rem 0.9rem;
+    transition: background-color 140ms ease, transform 140ms ease;
+  }
+
+  .dev-tuner > summary::-webkit-details-marker { display: none; }
+  .dev-tuner > summary::marker { content: ''; }
+  .dev-tuner > summary:hover { background: var(--dev-paper-deep); transform: translateY(-1px); }
+  .dev-tuner > summary:active { transform: translateY(0); }
+  .dev-tuner > summary:focus-visible { outline: 3px solid var(--dev-clay); outline-offset: 3px; }
+
+  .dev-tuner > summary svg,
+  .dev-tuner__label svg,
+  .dev-tuner__copy svg {
+    fill: none;
+    flex: 0 0 auto;
+    height: 1.1rem;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.6;
+    width: 1.1rem;
+  }
+
+  .dev-tuner__panel {
+    background: var(--dev-paper);
+    border: 1px solid var(--dev-rule);
+    border-radius: 1rem;
+    bottom: 54px;
+    box-shadow: 0 1.5rem 4rem rgb(45 41 38 / 26%);
+    max-height: min(672px, calc(100vh - 88px));
+    max-height: min(672px, calc(100dvh - 88px));
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 18px;
+    position: absolute;
+    right: 0;
+    width: min(336px, calc(100vw - 32px));
+  }
+
+  .dev-tuner:not([open]) .dev-tuner__panel { display: none; }
+
+  .dev-tuner__panel header {
+    align-items: flex-start;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .dev-tuner__kicker {
+    color: var(--dev-clay);
+    font-size: 0.8rem;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    margin: 0 0 0.25rem;
+    text-transform: uppercase;
+  }
+
+  .dev-tuner__panel h2 {
+    color: var(--dev-cocoa);
+    font-size: 1.35rem;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .dev-tuner__mark {
+    align-items: center;
+    background: var(--dev-paper-deep);
+    border-radius: 50%;
+    color: var(--dev-clay);
+    display: inline-flex;
+    font-family: ui-serif, Georgia, serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    height: 2.25rem;
+    justify-content: center;
+    width: 2.25rem;
+  }
+
+  .dev-tuner__intro {
+    color: var(--dev-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0.6rem 0 1rem;
+  }
+
+  .dev-tuner form {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-height: 0;
+  }
+
+  .dev-tuner__fields {
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .dev-tuner__hint {
+    color: var(--dev-muted);
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .dev-tuner__group {
+    border-top: 1px solid var(--dev-rule);
+    color: var(--dev-clay);
+    font-size: 0.8rem;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    margin: 0;
+    padding: 0.9rem 0 0.2rem;
+    text-transform: uppercase;
+  }
+
+  .dev-tuner__group + .dev-tuner__field { border-top: 0; }
+
+  .dev-tuner__field {
+    border-top: 1px solid var(--dev-rule);
+    display: grid;
+    gap: 0.65rem;
+    padding: 0.78rem 0;
+  }
+
+  .dev-tuner__label {
+    align-items: center;
+    color: var(--dev-cocoa);
+    display: flex;
+    font-size: 0.9rem;
+    font-weight: 700;
+    gap: 0.45rem;
+  }
+
+  .dev-tuner__label svg { color: var(--dev-clay); }
+
+  .dev-tuner select {
+    appearance: none;
+    background:
+      linear-gradient(45deg, transparent 50%, var(--dev-muted) 50%) calc(100% - 0.9rem) 50% / 0.35rem 0.35rem no-repeat,
+      linear-gradient(135deg, var(--dev-muted) 50%, transparent 50%) calc(100% - 0.65rem) 50% / 0.35rem 0.35rem no-repeat,
+      var(--dev-paper-deep);
+    border: 1px solid var(--dev-control);
+    border-radius: 0.75rem;
+    color: var(--dev-cocoa);
+    font: inherit;
+    min-height: 2.75rem;
+    padding: 0.6rem 2rem 0.6rem 0.75rem;
+    width: 100%;
+  }
+
+  .dev-tuner select:focus-visible,
+  .dev-tuner input:focus-visible,
+  .dev-tuner button:focus-visible {
+    outline: 3px solid var(--dev-clay);
+    outline-offset: 2px;
+  }
+
+  .dev-tuner__range {
+    align-items: center;
+    display: grid;
+    gap: 0.65rem;
+    grid-template-columns: minmax(0, 1fr) 4.8rem;
+  }
+
+  .dev-tuner input[type='range'] {
+    accent-color: var(--dev-clay);
+    cursor: pointer;
+    min-height: 2.75rem;
+    width: 100%;
+  }
+
+  .dev-tuner output {
+    color: var(--dev-muted);
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+    text-align: end;
+  }
+
+  .dev-tuner__actions {
+    border-top: 1px solid var(--dev-rule);
+    display: grid;
+    gap: 0.6rem;
+    grid-template-columns: 1fr 1.35fr;
+    padding-top: 1rem;
+  }
+
+  .dev-tuner__footer {
+    background: var(--dev-paper);
+    box-shadow: 0 -0.75rem 1rem var(--dev-paper);
+    flex: 0 0 auto;
+  }
+
+  .dev-tuner button {
+    align-items: center;
+    background: transparent;
+    border: 1px solid var(--dev-control);
+    border-radius: 0.75rem;
+    color: var(--dev-cocoa);
+    cursor: pointer;
+    display: inline-flex;
+    font: inherit;
+    font-weight: 700;
+    gap: 0.4rem;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .dev-tuner button:hover { background: var(--dev-paper-deep); }
+
+  .dev-tuner .dev-tuner__copy {
+    background: var(--dev-cocoa);
+    border-color: var(--dev-cocoa);
+    color: var(--dev-paper);
+  }
+
+  .dev-tuner .dev-tuner__copy:hover {
+    background: color-mix(in srgb, var(--dev-cocoa) 88%, white);
+  }
+
+  .dev-tuner__status {
+    color: var(--dev-muted);
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin: 0.6rem 0 0;
+    min-height: 1.1em;
+    text-align: center;
+  }
+
+  @media (max-width: 440px) {
+    .dev-tuner {
+      bottom: max(68px, env(safe-area-inset-bottom, 0px));
+      right: max(12px, env(safe-area-inset-right, 0px));
+    }
+
+    .dev-tuner__panel {
+      width: calc(100vw - 24px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dev-tuner > summary { transition-duration: 0.01ms; }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const root = document.documentElement
+    const panel = document.querySelector('#dev-tuner')
+    const form = document.querySelector('#dev-tuner-form')
+    const copyButton = panel?.querySelector('[data-copy-values]')
+    const status = panel?.querySelector('[data-tuner-status]')
+    const storageKey = 'nathan-design-tweaks'
+
+    if (!(panel instanceof HTMLDetailsElement) || !(form instanceof HTMLFormElement)) return
+
+    const fontStacks = {
+      humanist: '"Avenir Next", Avenir, "Helvetica Neue", ui-sans-serif, system-ui, sans-serif',
+      forest: '"Source Sans 3", "Source Sans Pro", "Gill Sans", "Trebuchet MS", Arial, sans-serif',
+      trailhead: '"Roboto Condensed Variable", sans-serif',
+      system: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+      neutral: '"Helvetica Neue", Helvetica, Arial, ui-sans-serif, sans-serif',
+      book: 'ui-serif, Charter, "Bitstream Charter", Georgia, serif',
+      interpretive: 'Rockwell, "Rockwell Nova", "American Typewriter", "Roboto Slab", Georgia, serif',
+      fieldGuide: 'Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif',
+      mono: 'ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace'
+    }
+
+    const fontPresets = {
+      humanist: {
+        font: 'humanist', size: '16', wordSpacing: '0', letterSpacing: '0',
+        headingTracking: '0', leading: '1.6', iconScale: '1', iconGap: '0.25',
+        contentWidth: '74', readingWidth: '44', surfacePadding: '0', sectionGap: '0'
+      },
+      forest: {
+        font: 'forest', size: '16.5', wordSpacing: '0.01', letterSpacing: '0.005',
+        headingTracking: '0.01', leading: '1.65', iconScale: '1', iconGap: '0.3',
+        contentWidth: '72', readingWidth: '43', surfacePadding: '2', sectionGap: '4'
+      },
+      trailhead: {
+        font: 'trailhead', size: '17', wordSpacing: '0.02', letterSpacing: '0.01',
+        headingTracking: '0.015', leading: '1.7', iconScale: '1.05', iconGap: '0.3',
+        contentWidth: '70', readingWidth: '46', surfacePadding: '4', sectionGap: '8'
+      },
+      system: {
+        font: 'system', size: '16', wordSpacing: '0', letterSpacing: '0',
+        headingTracking: '0', leading: '1.6', iconScale: '1', iconGap: '0.25',
+        contentWidth: '74', readingWidth: '44', surfacePadding: '0', sectionGap: '0'
+      },
+      neutral: {
+        font: 'neutral', size: '16', wordSpacing: '0', letterSpacing: '0',
+        headingTracking: '-0.005', leading: '1.6', iconScale: '1', iconGap: '0.25',
+        contentWidth: '72', readingWidth: '43', surfacePadding: '0', sectionGap: '0'
+      },
+      book: {
+        font: 'book', size: '17', wordSpacing: '0.01', letterSpacing: '0',
+        headingTracking: '0.015', leading: '1.75', iconScale: '0.95', iconGap: '0.3',
+        contentWidth: '68', readingWidth: '40', surfacePadding: '4', sectionGap: '8'
+      },
+      interpretive: {
+        font: 'interpretive', size: '16.5', wordSpacing: '0.015', letterSpacing: '0.005',
+        headingTracking: '0.02', leading: '1.7', iconScale: '1.05', iconGap: '0.3',
+        contentWidth: '70', readingWidth: '42', surfacePadding: '6', sectionGap: '12'
+      },
+      fieldGuide: {
+        font: 'fieldGuide', size: '17', wordSpacing: '0.01', letterSpacing: '0.005',
+        headingTracking: '0.015', leading: '1.75', iconScale: '1', iconGap: '0.3',
+        contentWidth: '68', readingWidth: '40', surfacePadding: '6', sectionGap: '8'
+      },
+      mono: {
+        font: 'mono', size: '15.5', wordSpacing: '-0.02', letterSpacing: '-0.01',
+        headingTracking: '0.02', leading: '1.7', iconScale: '1', iconGap: '0.4',
+        contentWidth: '72', readingWidth: '42', surfacePadding: '2', sectionGap: '4'
+      }
+    }
+
+    const defaults = { ...fontPresets.trailhead }
+
+    const number = (value) => Number.parseFloat(value)
+    const signed = (value, unit) => `${number(value) > 0 ? '+' : ''}${number(value)} ${unit}`
+
+    const readValues = () => Object.fromEntries(new FormData(form).entries())
+
+    const setStatus = (message) => {
+      if (status) status.textContent = message
+    }
+
+    const updateOutputs = (values) => {
+      const labels = {
+        size: `${number(values.size)} px`,
+        wordSpacing: signed(values.wordSpacing, 'em'),
+        letterSpacing: signed(values.letterSpacing, 'em'),
+        headingTracking: signed(values.headingTracking, 'em'),
+        leading: values.leading === defaults.leading ? 'Site default' : number(values.leading).toFixed(2),
+        iconScale: `${Math.round(number(values.iconScale) * 100)}%`,
+        iconGap: `${number(values.iconGap)} em`,
+        contentWidth: `${number(values.contentWidth)} rem`,
+        readingWidth: `${number(values.readingWidth)} rem`,
+        surfacePadding: signed(values.surfacePadding, 'px'),
+        sectionGap: signed(values.sectionGap, 'px')
+      }
+
+      for (const [key, label] of Object.entries(labels)) {
+        const output = panel.querySelector(`[data-output="${key}"]`)
+        if (output) output.textContent = label
+      }
+    }
+
+    const applyValues = (values, persist = true) => {
+      const font = fontStacks[values.font] || fontStacks.trailhead
+
+      root.style.setProperty('--font-sans', font)
+      root.style.fontSize = `${number(values.size)}px`
+      root.style.setProperty('--body-word-spacing', `${number(values.wordSpacing)}em`)
+      root.style.setProperty('--body-letter-spacing', `${number(values.letterSpacing)}em`)
+      root.style.setProperty('--action-icon-scale', `${number(values.iconScale)}em`)
+      root.style.setProperty('--action-icon-gap', `${number(values.iconGap)}em`)
+      root.style.setProperty('--content-width', `${number(values.contentWidth)}rem`)
+      root.style.setProperty('--reading-width', `${number(values.readingWidth)}rem`)
+      root.style.setProperty('--surface-padding-offset', `${number(values.surfacePadding)}px`)
+      root.style.setProperty('--heading-tracking-offset', `${number(values.headingTracking)}em`)
+      root.style.setProperty('--paragraph-leading', String(number(values.leading)))
+      root.style.setProperty('--section-spacing-offset', `${number(values.sectionGap)}px`)
+
+      updateOutputs(values)
+      if (persist) localStorage.setItem(storageKey, JSON.stringify(values))
+    }
+
+    const populateForm = (values) => {
+      for (const [name, value] of Object.entries(values)) {
+        const field = form.elements.namedItem(name)
+        if (field instanceof HTMLInputElement || field instanceof HTMLSelectElement) {
+          field.value = value
+        }
+      }
+    }
+
+    const loadValues = () => {
+      try {
+        const stored = JSON.parse(localStorage.getItem(storageKey) || '{}')
+        const preset = fontPresets[stored.font] || defaults
+        return { ...preset, ...stored }
+      } catch {
+        return { ...defaults }
+      }
+    }
+
+    const copyCss = async () => {
+      const values = readValues()
+      const font = fontStacks[values.font] || fontStacks.trailhead
+      const css = `:root {
+  --font-sans: ${font};
+  --body-word-spacing: ${number(values.wordSpacing)}em;
+  --body-letter-spacing: ${number(values.letterSpacing)}em;
+  --action-icon-scale: ${number(values.iconScale)}em;
+  --action-icon-gap: ${number(values.iconGap)}em;
+  --content-width: ${number(values.contentWidth)}rem;
+  --reading-width: ${number(values.readingWidth)}rem;
+  --section-spacing-offset: ${number(values.sectionGap)}px;
+  --surface-padding-offset: ${number(values.surfacePadding)}px;
+  --heading-tracking-offset: ${number(values.headingTracking)}em;
+  --paragraph-leading: ${number(values.leading)};
+  font-size: ${number(values.size)}px;
+}`
+
+      try {
+        await navigator.clipboard.writeText(css)
+        setStatus('Copied CSS')
+      } catch {
+        setStatus('Copy failed. Check browser permissions.')
+      }
+    }
+
+    const initialValues = loadValues()
+    populateForm(initialValues)
+    applyValues(initialValues, false)
+
+    form.addEventListener('input', (event) => {
+      if (event.target instanceof HTMLSelectElement && event.target.name === 'font') {
+        const preset = fontPresets[event.target.value]
+        if (preset) {
+          populateForm(preset)
+          applyValues(preset)
+          const label = event.target.selectedOptions[0]?.textContent?.trim() || 'typeface'
+          setStatus(`Applied ${label} preset`)
+          return
+        }
+      }
+
+      applyValues(readValues())
+      setStatus('Saved in this browser')
+    })
+
+    form.addEventListener('reset', () => {
+      requestAnimationFrame(() => {
+        populateForm(defaults)
+        applyValues(defaults)
+        localStorage.removeItem(storageKey)
+        setStatus('Reset to site defaults')
+      })
+    })
+
+    copyButton?.addEventListener('click', copyCss)
+  })()
+</script>
